@@ -1,0 +1,50 @@
+
+.mySlides {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.mySlides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.nav-container {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    padding: 50px 22px;
+    background-color: #2386c9;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.next {
+    border-radius: 0 10px 10px 0;
+}
+
+.prev {
+    border-radius: 10px 0 0 10px;
+}
+
+
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
