@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkingDayesTable extends Migration
+class CreateProviderImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateWorkingDayesTable extends Migration
      */
     public function up()
     {
-        Schema::create('working_dayes', function (Blueprint $table) {
+        Schema::create('provider_images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('provider_id')->unsigned();
-            $table->text('saturday')->nullable();
-            $table->text('sunday')->nullable();
-            $table->text('monday')->nullable();
-            $table->text('tuesday')->nullable();
-            $table->text('wednesday')->nullable();
-            $table->text('thursday')->nullable();
-            $table->text('friday')->nullable();
+            $table->text('title');
+            $table->string('image');
             $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
             $table->timestamps();
         });
@@ -35,6 +30,6 @@ class CreateWorkingDayesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('working_dayes');
+        Schema::dropIfExists('provider_images');
     }
 }

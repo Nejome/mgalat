@@ -1,23 +1,11 @@
 <?php
 
-use App\Setting;
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function()
-{
+Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
     Route::get('/', function () {
         $current = 'home';
         return view('client.index', compact('current'));
-    });
-
-    Route::get('/welcome', function () {
-        $current = 'welcome';
-        return view('client.welcome', compact('current'));
-    });
-
-    Route::get('/verification-code', function () {
-        $current = 'welcome';
-        return view('client.verification-code', compact('current'));
     });
 
     Route::get('/support', function () {
@@ -44,10 +32,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         return view('client.post', compact('current'));
     });
 
-    Route::get('/provider', function () {
-        $current = 'services';
-        return view('client.provider', compact('current'));
-    });
+
+    Route::get('/services_providers/{provider}/details', 'client\ProviderController@details');
+
+    Route::post('/services_providers/{provider}/rate', 'client\ProviderController@rate');
+
 
 });
 

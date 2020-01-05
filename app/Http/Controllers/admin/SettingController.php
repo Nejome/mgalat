@@ -24,13 +24,15 @@ class SettingController extends Controller
 
         $this->validate($request, [
            'title_ar' => 'required',
-           'title_en' => 'required'
+           'title_en' => 'required',
+            'max_providers_images' => 'required|numeric'
         ]);
 
         $setting = Setting::find(1);
 
         $setting->setTranslations('title', ['ar' => $request->title_ar, 'en' => $request->title_en]);
         $setting->author = $request->author;
+        $setting->max_providers_images = $request->max_providers_images;
         $setting->setTranslations('description', ['ar' => $request->description_ar, 'en' => $request->description_en]);
         $setting->keywords = $request->keywords;
         $setting->setTranslations('terms_conditions', ['ar' => $request->terms_conditions_ar, 'en' => $request->terms_conditions_en]);

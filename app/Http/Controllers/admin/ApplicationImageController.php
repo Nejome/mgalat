@@ -15,7 +15,7 @@ class ApplicationImageController extends Controller
         $this->validate($request, [
             'title_ar' => 'required',
             'title_en' => 'required',
-            'image' => 'required',
+            'image' => 'required|image',
         ]);
 
         $image = time().'.'.request()->image->getClientOriginalExtension();

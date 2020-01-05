@@ -717,10 +717,16 @@ button:focus {
 }
 
 .provider-user-img-container {
-    border: 3px solid #556080;
+    border: 1px solid #556080;
     padding: 2px;
+    border-radius: 50%;
     width: 70px;
     height: 70px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
@@ -740,7 +746,11 @@ button:focus {
     padding-top: 5px;
 }
 
-.filled-star {
+.filled-star-hover {
+    color: #ffca36;
+}
+
+.filled-star-selected {
     color: #ffca36;
 }
 
@@ -831,7 +841,6 @@ button:focus {
 .welcome-banner {
     height: 50%;
     margin-top: 77px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/welcome-banner.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -839,6 +848,7 @@ button:focus {
     text-align: center;
     color: #fff;
 }
+
 
 .welcome-banner h1 {
     position: relative;
@@ -1203,14 +1213,7 @@ button:focus {
 }
 
 .comment-title {
-    height: 35px;
-    width: 90px;
-    text-align: center;
-    display: inline-block;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #fff;
     color: #777777 !important;
-    line-height: 2.6;
     font-size: 16px;
     font-weight: 600;
 }
@@ -1244,6 +1247,43 @@ button:focus {
 .an-comment {
     background-color: #fcfcfc;
     padding: 15px 20px 3px 10px;
+}
+
+.an-rating {
+    background-color: #fcfcfc;
+    text-align: center;
+    padding: 13px;
+}
+
+.an-rating-icon-container {
+    border-radius: 50%;
+    padding: 15px;
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+}
+
+.an-rating-icon-container svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+}
+
+.an-rating h6 {
+    margin-top: 0.8rem;
+    margin-bottom: 0 !important;
+    color: #2386c9;
+    font-size: 12px;
+}
+
+.an-rating ul {
+    list-style: none;
+    padding: 0 !important;
+}
+
+.an-rating ul li {
+    display: inline;
+    font-size: 17px;
 }
 
 .show-location-btn {

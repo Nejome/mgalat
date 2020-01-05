@@ -8,6 +8,7 @@ use App\Provider;
 use App\City;
 use App\Specialty;
 use App\ProviderLocation;
+use App\WorkingDayes;
 
 class ProviderController extends Controller
 {
@@ -53,6 +54,10 @@ class ProviderController extends Controller
         $provider->is_special = $request->is_special;
         $provider->active = 1;
         $provider->save();
+
+        $week = new WorkingDayes;
+        $week->provider_id = $provider->id;
+        $week->save();
 
         return redirect(url('admin/providers'))->with('created', 'تمت اضافة مزود الخدمة الجديد بنجاح');
 

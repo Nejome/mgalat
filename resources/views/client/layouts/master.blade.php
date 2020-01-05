@@ -35,6 +35,10 @@
 <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('client/slider/slider.js')}}"></script>
 <script src="{{asset('client/js/custom.js')}}"></script>
+<script src="{{asset('client/myJs/rating.js')}}"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKUtiN-bHruEDPRjKN_-qjq1Kg8WAOjUI"></script>
+<script src="{{asset('client/myJs/providerLocation.js')}}"></script>
 
 <script>
     $/*(window).on('load', function(){

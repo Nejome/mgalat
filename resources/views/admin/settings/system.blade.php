@@ -25,16 +25,22 @@
                     <div class="pl-lg-4">
                         <div class="row">
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" >العنوان</label>
                                     <input type="text" value="{{$setting->getTranslation('title', 'ar')}}" name="title_ar" class="form-control form-control-alternative">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label">المؤلف</label>
                                     <input type="text" value="{{$setting->author}}" name="author" class="form-control form-control-alternative">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">اقصي عدد صور لمزودي الخدمات المميزين</label>
+                                    <input type="text" value="{{$setting->max_providers_images}}" name="max_providers_images" class="form-control form-control-alternative">
                                 </div>
                             </div>
 

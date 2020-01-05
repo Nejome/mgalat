@@ -189,6 +189,10 @@
                                                 <i class="fa fa-calendar text-blue"></i>
                                             </a>&nbsp;&nbsp;&nbsp;
 
+                                            <a href="{{url('admin/providers/'.$provider->id.'/images')}}" data-toggle="tooltip" data-placement="top" data-original-title="صور مزود الخدمة">
+                                                <i class="fa fa-images text-success"></i>
+                                            </a>&nbsp;&nbsp;&nbsp;
+
                                             <a href="#" onclick="delete_confirm('{{$provider->id}}', '{{url('admin/providers/'.$provider->id.'/delete')}}')" data-toggle="tooltip" data-placement="top" data-original-title="حذف">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </a>&nbsp;&nbsp;&nbsp;

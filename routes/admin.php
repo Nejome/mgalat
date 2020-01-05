@@ -63,6 +63,11 @@ Route::middleware('auth')->group(function() {
         Route::get('/providers/{provider}/working_days', 'admin\WorkingDaysController@index');
         Route::post('/providers/{provider}/update_working_days', 'admin\WorkingDaysController@update');
 
+        //**********Provider Images Routes**********//
+        Route::get('/providers/{provider}/images', 'admin\ProviderImageController@index');
+        Route::post('/providers/{provider}/store_image', 'admin\ProviderImageController@store_image');
+        Route::get('/providers/{image}/delete_image', 'admin\ProviderImageController@delete_image');
+
     });
 
     Route::middleware('dscManager')->group(function() {
