@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Provider;
 use App\ProviderRating;
 use Carbon\Carbon;
+use App\Specialty;
 
 class ProviderController extends Controller
 {
 
     public function details(Provider $provider) {
 
-        $current = 'services';
+        $current = 'departments';
 
         $today = Carbon::today()->locale('en')->dayName;
 
@@ -43,6 +44,34 @@ class ProviderController extends Controller
         $rate->save();
 
         return back()->with('rated', 'تمت اضافة تقييمك بنجاح');
+
+    }
+
+    public function search(Request $request) {
+
+        $current = 'departments';
+
+        $specialties = Specialty::where('title->ar','LIKE','%'.$request->text.'%')->get();
+
+        $specialties_id = [];
+        foreach ($specialties as $row){
+            $specialties_id[] = $row->id;
+        }
+
+        $special_providers_count = 0;
+        $normal_providers_count = 0;
+
+        $providers = Provider::whereIn('specialty_id', $specialties_id)->where('city_id', $request->city)->OrderBy('is_special', 'desc')->get();
+
+        foreach($providers as $provider) {
+            if($provider->is_special == 1) {
+                $special_providers_count = $special_providers_count + 1;
+            }else {
+                $normal_providers_count = $normal_providers_count + 1;
+            }
+        }
+
+        return view('client.providers.search-result', compact(['current', 'specialties', 'providers', 'special_providers_count', 'normal_providers_count']));
 
     }
 

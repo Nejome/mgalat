@@ -123,6 +123,14 @@
                     </li>
                 @endcanany
 
+                @can('ادارة المدونة')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/posts')}}">
+                            <i class="fa fa-book text-indigo"></i>المدونة
+                        </a>
+                    </li>
+                @endcan
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/logout')}}">
                         <i class="fas fa-sign-out-alt text-danger"></i> تسجيل الخروج

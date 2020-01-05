@@ -804,8 +804,7 @@
                                     <i class="fa fa-star @if($provider->ratingTotal() >= 4) filled-star-selected @endif"></i>
                                     <i class="fa fa-star @if($provider->ratingTotal() >= 5) filled-star-selected @endif"></i>
                                 </div>
-                                <span>
-                                <i class="fa fa-thumbs-o-up"></i>({{$provider->rate->count()}} تقييمات)</span>
+                                <span><i class="fa fa-thumbs-o-up"></i>({{$provider->rate->count()}} تقييمات)</span>
                             </div>
 
                             @if($provider->is_special)
@@ -819,24 +818,34 @@
 
                         </div>
 
-                        <a href="#" class="show-location-btn m-auto" data-toggle="modal" data-target="#locationModel">اظهار الموقع</a>
+                        @if($provider->location)
 
+                            <input id="lat" type="hidden" value="{{$provider->location->lat}}">
+                            <input id="lng" type="hidden" value="{{$provider->location->lng}}">
+                            <input id="icon" type="hidden" value="{{asset('client/images/placeholder.svg')}}">
+                            <input id="image" type="hidden" value="{{asset('uploads/providers/'.$provider->image)}}">
+                            <input id="city" type="hidden" value="{{$provider->city->title}}">
 
-                        <div class="modal fade" id="locationModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">الموقع</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4825851.352956702!2d-4.064941!3d53.800650999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2suk!4v1575040192325!5m2!1sen!2suk" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                            <a href="#" class="show-location-btn m-auto" data-toggle="modal" data-target="#locationModel">اظهار الموقع</a>
+
+                            <div class="modal fade" id="locationModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">الموقع</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="providerLocatiolnMap" style="width: 100%; height: 450px;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        @endif
+
                     </div>
 
                     <div class="row text-right mt-5 mb-4">
@@ -884,6 +893,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="contact-section row text-right mb-4">
                         <div class="col-12 row">
                             <div class="col-2 mr-1">
@@ -987,12 +997,30 @@
                         </div>
                     @endif
 
-                    @if(isset($provider->snapchat) && $provider->snapchat != '')
-                        <div class="contact-section row text-right mb-4">
-                            <div class="col-12 row">
-                                <div class="col-2 mr-1">
-                                    <div class="contact-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 496 496" style="enable-background:new 0 0 496 496;" xml:space="preserve">
+                    @if($provider->is_special)
+
+                        @if(isset($provider->facebook) && $provider->facebook != '')
+                            <div class="contact-section row text-right mb-4">
+                                <div class="col-12 row">
+                                    <div class="col-2 mr-1">
+                                        <div class="contact-icon text-left">
+                                            <i class="fa fa-facebook"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 ml-auto p-0">
+                                        <h3 class="m-0" style="color: #7f7f7f;">فيس بوك</h3>
+                                        <h5 class="m-0" style="color: #c3c3c3;">{{$provider->facebook}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(isset($provider->snapchat) && $provider->snapchat != '')
+                            <div class="contact-section row text-right mb-4">
+                                <div class="col-12 row">
+                                    <div class="col-2 mr-1">
+                                        <div class="contact-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 496 496" style="enable-background:new 0 0 496 496;" xml:space="preserve">
 <g>
     <g>
         <g>
@@ -1001,115 +1029,116 @@
         </g>
     </g>
 </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
 </svg>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 ml-auto p-0">
+                                        <h3 class="m-0" style="color: #7f7f7f;">سناب شات</h3>
+                                        <h5 class="m-0" style="color: #c3c3c3;">{{$provider->snapchat}}</h5>
                                     </div>
                                 </div>
-                                <div class="col-6 ml-auto p-0">
-                                    <h3 class="m-0" style="color: #7f7f7f;">سناب شات</h3>
-                                    <h5 class="m-0" style="color: #c3c3c3;">{{$provider->snapchat}}</h5>
-                                </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
-                    @if(isset($provider->twitter) && $provider->twitter != '')
-                        <div class="contact-section row text-right mb-4">
-                            <div class="col-12 row">
-                                <div class="col-2 mr-1">
-                                    <div class="contact-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16" viewBox="0 0 16 16">
-                                            <path fill="#2386c9" d="M16 3c-0.6 0.3-1.2 0.4-1.9 0.5 0.7-0.4 1.2-1 1.4-1.8-0.6 0.4-1.3 0.6-2.1 0.8-0.6-0.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 0.3 0 0.5 0.1 0.7-2.7-0.1-5.2-1.4-6.8-3.4-0.3 0.5-0.4 1-0.4 1.7 0 1.1 0.6 2.1 1.5 2.7-0.5 0-1-0.2-1.5-0.4 0 0 0 0 0 0 0 1.6 1.1 2.9 2.6 3.2-0.3 0.1-0.6 0.1-0.9 0.1-0.2 0-0.4 0-0.6-0.1 0.4 1.3 1.6 2.3 3.1 2.3-1.1 0.9-2.5 1.4-4.1 1.4-0.3 0-0.5 0-0.8 0 1.5 0.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3 0-0.1 0-0.3 0-0.4 0.7-0.5 1.3-1.1 1.7-1.8z"/>
-                                        </svg>
+                        @if(isset($provider->twitter) && $provider->twitter != '')
+                            <div class="contact-section row text-right mb-4">
+                                <div class="col-12 row">
+                                    <div class="col-2 mr-1">
+                                        <div class="contact-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16" viewBox="0 0 16 16">
+                                                <path fill="#2386c9" d="M16 3c-0.6 0.3-1.2 0.4-1.9 0.5 0.7-0.4 1.2-1 1.4-1.8-0.6 0.4-1.3 0.6-2.1 0.8-0.6-0.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 0.3 0 0.5 0.1 0.7-2.7-0.1-5.2-1.4-6.8-3.4-0.3 0.5-0.4 1-0.4 1.7 0 1.1 0.6 2.1 1.5 2.7-0.5 0-1-0.2-1.5-0.4 0 0 0 0 0 0 0 1.6 1.1 2.9 2.6 3.2-0.3 0.1-0.6 0.1-0.9 0.1-0.2 0-0.4 0-0.6-0.1 0.4 1.3 1.6 2.3 3.1 2.3-1.1 0.9-2.5 1.4-4.1 1.4-0.3 0-0.5 0-0.8 0 1.5 0.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3 0-0.1 0-0.3 0-0.4 0.7-0.5 1.3-1.1 1.7-1.8z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 ml-auto p-0">
+                                        <h3 class="m-0" style="color: #7f7f7f;">تويتر</h3>
+                                        <h5 class="m-0" style="color: #c3c3c3;">{{$provider->twitter}}</h5>
                                     </div>
                                 </div>
-                                <div class="col-6 ml-auto p-0">
-                                    <h3 class="m-0" style="color: #7f7f7f;">تويتر</h3>
-                                    <h5 class="m-0" style="color: #c3c3c3;">{{$provider->twitter}}</h5>
-                                </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
-                    @if(isset($provider->snapchat) && $provider->snapchat != '')
-                        <div class="contact-section row text-right mb-4">
-                            <div class="col-12 row">
-                                <div class="col-2 mr-1">
-                                    <div class="contact-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="169.063px" height="169.063px" viewBox="0 0 169.063 169.063" style="enable-background:new 0 0 169.063 169.063;" xml:space="preserve">
+                        @if(isset($provider->snapchat) && $provider->snapchat != '')
+                            <div class="contact-section row text-right mb-4">
+                                <div class="col-12 row">
+                                    <div class="col-2 mr-1">
+                                        <div class="contact-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="169.063px" height="169.063px" viewBox="0 0 169.063 169.063" style="enable-background:new 0 0 169.063 169.063;" xml:space="preserve">
 <g>
     <path d="M122.406,0H46.654C20.929,0,0,20.93,0,46.655v75.752c0,25.726,20.929,46.655,46.654,46.655h75.752   c25.727,0,46.656-20.93,46.656-46.655V46.655C169.063,20.93,148.133,0,122.406,0z M154.063,122.407   c0,17.455-14.201,31.655-31.656,31.655H46.654C29.2,154.063,15,139.862,15,122.407V46.655C15,29.201,29.2,15,46.654,15h75.752   c17.455,0,31.656,14.201,31.656,31.655V122.407z"/>
     <path d="M84.531,40.97c-24.021,0-43.563,19.542-43.563,43.563c0,24.02,19.542,43.561,43.563,43.561s43.563-19.541,43.563-43.561   C128.094,60.512,108.552,40.97,84.531,40.97z M84.531,113.093c-15.749,0-28.563-12.812-28.563-28.561   c0-15.75,12.813-28.563,28.563-28.563s28.563,12.813,28.563,28.563C113.094,100.281,100.28,113.093,84.531,113.093z"/>
     <path d="M129.921,28.251c-2.89,0-5.729,1.17-7.77,3.22c-2.051,2.04-3.23,4.88-3.23,7.78c0,2.891,1.18,5.73,3.23,7.78   c2.04,2.04,4.88,3.22,7.77,3.22c2.9,0,5.73-1.18,7.78-3.22c2.05-2.05,3.22-4.89,3.22-7.78c0-2.9-1.17-5.74-3.22-7.78   C135.661,29.421,132.821,28.251,129.921,28.251z"/>
 </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
-                                            <g>
-                                            </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
+                                                <g>
+                                                </g>
 </svg>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 ml-auto p-0">
+                                        <h3 class="m-0" style="color: #7f7f7f;">انستجرام</h3>
+                                        <h5 class="m-0" style="color: #c3c3c3;">{{$provider->snapchat}}</h5>
                                     </div>
                                 </div>
-                                <div class="col-6 ml-auto p-0">
-                                    <h3 class="m-0" style="color: #7f7f7f;">انستجرام</h3>
-                                    <h5 class="m-0" style="color: #c3c3c3;">{{$provider->snapchat}}</h5>
-                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
 
                     <div class="col-12">

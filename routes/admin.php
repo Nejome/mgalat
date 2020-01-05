@@ -2,7 +2,6 @@
 
 //**********Session Routes**********//
 
-
 Route::get('/', 'admin\SessionsController@login_page')->name('login');
 Route::post('/login', 'admin\SessionsController@login');
 
@@ -116,6 +115,18 @@ Route::middleware('auth')->group(function() {
 
         Route::get('providers/{provider}/location', 'admin\ProviderController@location');
         Route::post('providers/{provider}/updateLocation', 'admin\ProviderController@updateLocation');
+
+    });
+
+    Route::middleware('blogManager')->group(function() {
+
+        //**********Posts Routes**********//
+        Route::get('posts', 'admin\PostController@index');
+        Route::get('posts/create', 'admin\PostController@create');
+        Route::post('posts/store', 'admin\PostController@store');
+        Route::get('posts/{post}/edit', 'admin\PostController@edit');
+        Route::post('posts/{post}/update', 'admin\PostController@update');
+        Route::get('posts/{post}/delete', 'admin\PostController@delete');
 
     });
 

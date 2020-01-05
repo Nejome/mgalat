@@ -29,7 +29,7 @@ class DepartmentController extends Controller
             'title_ar' => 'required',
             'title_en' => 'required',
             'image' => 'required|image',
-            'icon' => 'required|image|mimes:svg',
+            'icon' => 'required|mimes:jpeg,png,jpg,gif,svg',
             'color' => 'required'
         ]);
 
@@ -62,7 +62,7 @@ class DepartmentController extends Controller
             'title_ar' => 'required',
             'title_en' => 'required',
             'image' => 'image',
-            'icon' => 'image|mimes:svg',
+            'icon' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         if(isset($request->image) && $request->image != ''){

@@ -20,16 +20,10 @@
 
                     <li class="nav-item @if(isset($current) && $current == 'home') active @endif"><a class="nav-link" href="{{url('/')}}">{{__('home.menu_home')}}</a></li>
                     <li class="nav-item @if(isset($current) && $current == 'application') active @endif"><a class="nav-link" href="{{url('/application')}}">تطبيق مجالات تك</a></li>
-                    <li class="nav-item @if(isset($current) && $current == 'services') active @endif"><a class="nav-link" href="{{url('/services')}}">الخدمات</a></li>
+                    <li class="nav-item @if(isset($current) && $current == 'departments') active @endif"><a class="nav-link" href="{{url('/departments')}}">الخدمات</a></li>
                     <li class="nav-item @if(isset($current) && $current == 'blog') active @endif"><a class="nav-link" href="{{url('/blog')}}">المدونة</a></li>
 
                     <li class="nav-item"><a class="nav-support-link" href="{{url('/support')}}">الدعم الفني</a></li>
-                    <li class="nav-item">
-                        <a class="nav-login-link" href="{{url('/welcome')}}">
-                            <i class="fa fa-user"></i>
-                            تسجيل الدخول
-                        </a>
-                    </li>
 
                 </ul>
             </div>

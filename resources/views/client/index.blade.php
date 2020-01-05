@@ -11,33 +11,33 @@
 
         <div class="banner-search-container">
             <div class="col-md-8 m-auto">
-                <form class="search-form">
+
+                <form method="POST" action="{{url('/services_providers/search')}}" class="search-form">
+
+                    {{csrf_field()}}
+
                     <div class="row">
-                        <div class="col-md-3 m-1 m-md-0 p-0">
-                            <select>
-                                <option disabled selected>موقعك</option>
-                                <option>الرياض</option>
-                                <option>جدة</option>
-                                <option>المدينة</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3 m-1 m-md-0 p-0">
-                            <select>
-                                <option disabled selected>التصنيف</option>
-                                <option>الهواتف</option>
-                                <option>صيانة السيارات</option>
-                            </select>
-                        </div>
+
                         <div class="col-md-4 m-1 m-md-0 p-0">
-                            <input type="text" placeholder="كلمة البحث">
+                            <select name="city">
+                                @foreach($g_cities as $city)
+                                    <option value="{{$city->id}}">{{$city->title}}</option>
+                                @endforeach
+                            </select>
                         </div>
+
+                        <div class="col-md-6 m-1 m-md-0 p-0">
+                            <input type="text" name="text" placeholder="كلمة البحث" required>
+                        </div>
+
                         <div class="col-md-2 m-1 m-md-0 p-0">
-                            <a href="{{url('/search-result')}}" class="search-btn pt-2">
-                                <i class="fa fa-search"></i>
-                            </a>
+                            <button type="submit" class="search-btn pt-2"><i class="fa fa-search"></i></button>
                         </div>
+
                     </div>
+
                 </form>
+
             </div>
         </div>
 
@@ -216,241 +216,45 @@
     <section class="latest-provider">
         <div class="container">
 
-            <h3 class="section-title text-center">أحدث مقدمي الخدمات</h3>
+            <h3 class="section-title text-center mb-5">أحدث مقدمي الخدمات</h3>
 
             <div class="row">
 
-                <div class="col-md-4 mb-4">
-                    <img src="{{asset('client/images/provider1.jpeg')}}" width="100%" height="230px">
-                    <div class="row mt-2">
-                        <div class="col-3 text-center">
-                            <div class="provider-user-img-container">
-                                <a href="{{url('/provider')}}">
-                                    <img src="{{asset('client/images/user.svg')}}">
-                                </a>
+                @foreach($g_6_providers as $row)
+                    <div class="col-md-3 mb-4">
+                        <img src="{{asset('uploads/providers/'.$row->image)}}" width="100%" height="200px">
+                        <div class="text-right mt-3">
+                            <span style="font-size: 16px;">{{$row->specialty->title}}</span>
+                            <a href="{{url('/services_providers/'.$row->id.'/details')}}"><h3 style="margin-bottom: 0;">{{$row->name}}</h3></a>
+                            <div>
+                                <div class="stars d-inline-block m-2">
+                                    <i class="fa fa-star @if($row->ratingTotal() >= 1) filled-star-selected @endif"></i>
+                                    <i class="fa fa-star @if($row->ratingTotal() >= 2) filled-star-selected @endif"></i>
+                                    <i class="fa fa-star @if($row->ratingTotal() >= 3) filled-star-selected @endif"></i>
+                                    <i class="fa fa-star @if($row->ratingTotal() >= 4) filled-star-selected @endif"></i>
+                                    <i class="fa fa-star @if($row->ratingTotal() >= 5) filled-star-selected @endif"></i>
+                                </div>
+                                <span><i class="fa fa-thumbs-o-up"></i>({{$row->rate->count()}} تقييمات)</span>
                             </div>
                         </div>
-                        <div class="col-9 text-right">
-                            <div>
-                                <button class="checked-btn" disabled>
-                                    <span class="checked-btn-icon"><i class="fa fa-check sp-tags-icon"></i></span>
-                                    معتمد
-                                </button>
-                            </div>
-                            <div>محمد علي</div>
-                            <div>
-                            <span class="stars">
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-                                <span>
-                                /
-                                <i class="fa fa-thumbs-o-up"></i>
-                                5
-                                (4 تقييم)
-                            </span>
-                            </div>
-                        </div>
+                        @if($row->is_special)
+                            <button class="checked-btn in-image" disabled>
+                                <span class="checked-btn-icon"><i class="fa fa-check sp-tags-icon"></i></span>
+                                مميز
+                            </button>
+                        @endif
                     </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <img src="{{asset('client/images/provider2.jpeg')}}" width="100%" height="230px">
-                    <div class="row mt-2">
-                        <div class="col-3 text-center">
-                            <div class="provider-user-img-container">
-                                <a href="{{url('/provider')}}">
-                                    <img src="{{asset('client/images/user.svg')}}">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-9 text-right">
-                            <div>
-                                <button class="checked-btn" disabled>
-                                    <span class="checked-btn-icon"><i class="fa fa-check sp-tags-icon"></i></span>
-                                    معتمد
-                                </button>
-                            </div>
-                            <div>محمد علي</div>
-                            <div>
-                            <span class="stars">
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-                                <span>
-                                /
-                                <i class="fa fa-thumbs-o-up"></i>
-                                5
-                                (4 تقييم)
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <img src="{{asset('client/images/provider3.jpeg')}}" width="100%" height="230px">
-                    <div class="row mt-2">
-                        <div class="col-3 text-center">
-                            <div class="provider-user-img-container">
-                                <a href="{{url('/provider')}}">
-                                    <img src="{{asset('client/images/user.svg')}}">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-9 text-right">
-                            <div>
-                                <button class="checked-btn" disabled>
-                                    <span class="checked-btn-icon"><i class="fa fa-check sp-tags-icon"></i></span>
-                                    معتمد
-                                </button>
-                            </div>
-                            <div>محمد علي</div>
-                            <div>
-                            <span class="stars">
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-                                <span>
-                                /
-                                <i class="fa fa-thumbs-o-up"></i>
-                                5
-                                (4 تقييم)
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <img src="{{asset('client/images/provider4.jpeg')}}" width="100%" height="230px">
-                    <div class="row mt-2">
-                        <div class="col-3 text-center">
-                            <div class="provider-user-img-container">
-                                <a href="{{url('/provider')}}">
-                                    <img src="{{asset('client/images/user.svg')}}">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-9 text-right">
-                            <div>
-                                <button class="checked-btn" disabled>
-                                    <span class="checked-btn-icon"><i class="fa fa-check sp-tags-icon"></i></span>
-                                    معتمد
-                                </button>
-                            </div>
-                            <div>محمد علي</div>
-                            <div>
-                            <span class="stars">
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-                                <span>
-                                /
-                                <i class="fa fa-thumbs-o-up"></i>
-                                5
-                                (4 تقييم)
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <img src="{{asset('client/images/provider5.jpeg')}}" width="100%" height="230px">
-                    <div class="row mt-2">
-                        <div class="col-3 text-center">
-                            <div class="provider-user-img-container">
-                                <a href="{{url('/provider')}}">
-                                    <img src="{{asset('client/images/user.svg')}}">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-9 text-right">
-                            <div>
-                                <button class="checked-btn" disabled>
-                                    <span class="checked-btn-icon"><i class="fa fa-check sp-tags-icon"></i></span>
-                                    معتمد
-                                </button>
-                            </div>
-                            <div>محمد علي</div>
-                            <div>
-                            <span class="stars">
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-                                <span>
-                                /
-                                <i class="fa fa-thumbs-o-up"></i>
-                                5
-                                (4 تقييم)
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <img src="{{asset('client/images/provider6.jpeg')}}" width="100%" height="230px">
-                    <div class="row mt-2">
-                        <div class="col-3 text-center">
-                            <div class="provider-user-img-container">
-                                <a href="{{url('/provider')}}">
-                                    <img src="{{asset('client/images/user.svg')}}">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-9 text-right">
-                            <div>
-                                <button class="checked-btn" disabled>
-                                    <span class="checked-btn-icon"><i class="fa fa-check sp-tags-icon"></i></span>
-                                    معتمد
-                                </button>
-                            </div>
-                            <div>محمد علي</div>
-                            <div>
-                            <span class="stars">
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star filled-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-                                <span>
-                                /
-                                <i class="fa fa-thumbs-o-up"></i>
-                                5
-                                (4 تقييم)
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
 
         </div>
     </section>
 
-    <section class="latest-articles">
+    <section class="latest-articles mb-5">
         <div class="container">
 
-            <h3 class="section-title text-center">أحدث المقالات</h3>
+            <h3 class="section-title text-center mb-5">أحدث المقالات</h3>
 
             <div class="row">
 
@@ -490,14 +294,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="join-area">
-        <div class="container">
-            <h4>هل انت محترف ولديك خبرة بتقديم خدمة ما</h4>
-            <h3 class="mb-3">خدمة تك يمكنك من الوصول الي عدد كبير من العملاء </h3>
-            <a href="#" class="order-now-btn">انضم الان</a>
         </div>
     </section>
 

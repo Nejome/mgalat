@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Provider;
+use App\City;
 use App\Setting;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
     {
 
         view()->share('setting', Setting::find(1));
+        view()->share('g_cities', City::all());
+        view()->share('g_6_providers', Provider::latest()->limit(6)->get());
 
     }
 }

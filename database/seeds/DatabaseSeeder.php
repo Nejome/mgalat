@@ -48,6 +48,10 @@ class DatabaseSeeder extends Seeder
                 'name' => 'ادارة الدول والاقسام والتخصصات',
                 'guard_name' => 'web'
             ],
+            [
+                'name' => 'ادارة المدونة',
+                'guard_name' => 'web'
+            ],
         ]);
 
         DB::table('settings')->insert([

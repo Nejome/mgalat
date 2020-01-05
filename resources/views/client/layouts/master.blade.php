@@ -33,12 +33,12 @@
 <script src="{{asset('client/js/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('client/js/popper.js')}}"></script>
 <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('client/slider/slider.js')}}"></script>
 <script src="{{asset('client/js/custom.js')}}"></script>
+<script src="{{asset('client/slider/slider.js')}}"></script>
 <script src="{{asset('client/myJs/rating.js')}}"></script>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKUtiN-bHruEDPRjKN_-qjq1Kg8WAOjUI"></script>
 <script src="{{asset('client/myJs/providerLocation.js')}}"></script>
+<script src="{{asset('client/myJs/searchMap.js')}}"></script>
 
 <script>
     $/*(window).on('load', function(){
@@ -46,6 +46,7 @@
         $('#loading').hide();
     });*/
 </script>
+
 
 </body>
 

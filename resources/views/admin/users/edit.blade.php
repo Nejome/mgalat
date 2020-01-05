@@ -65,7 +65,7 @@
 
                                 <div class="row">
                                     @foreach($permissions as $permission)
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 mb-2">
                                             <div class="custom-control custom-control-alternative custom-checkbox">
                                                 <input type="checkbox" name="permissions[]" class="custom-control-input" value="{{$permission->id}}" id="{{$permission->id}}" @if($user_permissions->contains('name', $permission->name)) checked @endif>
                                                 <label class="custom-control-label" for="{{$permission->id}}">

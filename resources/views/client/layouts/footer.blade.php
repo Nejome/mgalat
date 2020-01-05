@@ -159,12 +159,13 @@
                 <div class="single-footer-widget instafeed">
                     <h6 class="footer_title">احدث مزودي الخدمات المميزين</h6>
                     <div class="row">
-                        <div class="col-4 p-1"><img src="{{asset('client/images/provider1.jpeg')}}" width="100%" height="60px"></div>
-                        <div class="col-4 p-1"><img src="{{asset('client/images/provider2.jpeg')}}" width="100%" height="60px"></div>
-                        <div class="col-4 p-1"><img src="{{asset('client/images/provider3.jpeg')}}" width="100%" height="60px"></div>
-                        <div class="col-4 p-1"><img src="{{asset('client/images/provider4.jpeg')}}" width="100%" height="60px"></div>
-                        <div class="col-4 p-1"><img src="{{asset('client/images/provider5.jpeg')}}" width="100%" height="60px"></div>
-                        <div class="col-4 p-1"><img src="{{asset('client/images/provider6.jpeg')}}" width="100%" height="60px"></div>
+                        @foreach($g_6_providers as $row)
+                            <div class="col-4 p-1">
+                                <a href="{{url('services_providers/'.$row->id.'/details')}}">
+                                    <img src="{{asset('uploads/providers/'.$row->image)}}" width="100%" height="60px">
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
