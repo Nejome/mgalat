@@ -73,9 +73,13 @@
 
                                     <td>{{$post->views}}</td>
 
-                                    <td>5</td>
+                                    <td>{{$post->comments->count()}}</td>
 
                                     <td>
+                                        <a href="{{url('admin/posts/'.$post->id.'/comments')}}">
+                                            <i class="fas fa-comments text-blue"></i>
+                                        </a>
+                                        &nbsp;&nbsp;&nbsp;
                                         <a href="{{url('admin/posts/'.$post->id.'/edit')}}">
                                             <i class="fas fa-pen text-warning"></i>
                                         </a>

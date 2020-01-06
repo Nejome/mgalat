@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\PostComment;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,13 @@ class PostController extends Controller
         $post->image = $image_name;
         $post->save();
 
-        return redirect(url('admin/posts'))->with('added', 'تمت اضافة المنشور الجديد بنجاح');
+        return redirect(url('admin/posts'))->with('added', 'تمت اضافة المقال الجديد بنجاح');
+
+    }
+
+    public function comments(Post $post) {
+
+        return view('admin.posts.post_comments', compact(['post']));
 
     }
 
@@ -81,7 +88,15 @@ class PostController extends Controller
         $post->setTranslations('details', ['ar' => $request->details_ar, 'en' => $request->details_en]);
         $post->save();
 
-        return redirect(url('admin/posts'))->with('updated', 'تم تعديل بيانات المنشور بنجاح');
+        return redirect(url('admin/posts'))->with('updated', 'تم تعديل بيانات المقال بنجاح');
+
+    }
+
+    public function deleteComment(PostComment $comment) {
+
+        $comment->delete();
+
+        return back()->with('deleted', 'تم حذف التعليق بنجاح');
 
     }
 
@@ -94,7 +109,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return back()->with('deleted', 'تم حذف المنشور بنجاح');
+        return back()->with('deleted', 'تم حذف المقال بنجاح');
 
     }
 

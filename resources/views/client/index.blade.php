@@ -258,41 +258,20 @@
 
             <div class="row">
 
-                <div class="col-md-4">
-                    <img src="{{asset('client/images/provider1.jpeg')}}" width="100%" height="180px">
-                    <div class="text-right home-article-link mt-3">
-                        13/2/2018
-                        <h3>استكشاف خدمات مجالات تك</h3>
-                        <a href="{{url('/post')}}">
-                            <span><i class="fa fa-th-large"></i></span>
-                            أقرا المزيد
-                        </a>
+                @foreach($g_3_posts as $post)
+                    <div class="col-md-4">
+                        <img src="{{asset('uploads/posts/'.$post->image)}}" width="100%" height="180px">
+                        <div class="text-right home-article-link mt-3">
+                            {{$post->created_at->toDayDateTimeString()}}
+                            <h3>{{$post->title}}</h3>
+                            <a href="{{url('/blog/posts/'.$post->id.'/show')}}">
+                                <span><i class="fa fa-th-large"></i></span>
+                                أقرا المزيد
+                            </a>
+                        </div>
                     </div>
-                </div>
+                @endforeach
 
-                <div class="col-md-4">
-                    <img src="{{asset('client/images/provider2.jpeg')}}" width="100%" height="180px">
-                    <div class="text-right home-article-link mt-3">
-                        13/2/2018
-                        <h3>تعرف علي مجالات تك</h3>
-                        <a href="{{url('/post')}}">
-                            <span><i class="fa fa-th-large"></i></span>
-                            أقرا المزيد
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <img src="{{asset('client/images/provider3.jpeg')}}" width="100%" height="180px">
-                    <div class="text-right home-article-link mt-3">
-                        13/2/2018
-                        <h3>خطوات تحميل التطبيق</h3>
-                        <a href="{{url('/post')}}">
-                            <span><i class="fa fa-th-large"></i></span>
-                            أقرا المزيد
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

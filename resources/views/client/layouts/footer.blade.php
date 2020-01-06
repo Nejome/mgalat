@@ -133,14 +133,12 @@
                 <div class="single-footer-widget">
                     <h6 class="footer_title">أحدث المقالات</h6>
                     <div class="row">
-                        <div class="col-4 mb-1"><img src="{{asset('client/images/provider1.jpeg')}}" width="100%" style="border-radius: 3px;"></div>
-                        <div class="col-8 mb-1">اهلا بكم في مجالات تك</div>
 
-                        <div class="col-4 mb-1"><img src="{{asset('client/images/provider2.jpeg')}}" width="100%" style="border-radius: 3px;"></div>
-                        <div class="col-8 mb-1">كيف توفر التكاليف مع مجالات تك</div>
+                        @foreach($g_3_posts as $post)
+                            <div class="col-4 mb-1"><img src="{{asset('uploads/posts/'.$post->image)}}" width="100%" style="border-radius: 3px;"></div>
+                            <div class="col-8 mb-1">{{$post->title}}</div>
+                        @endforeach
 
-                        <div class="col-4 mb-1"><img src="{{asset('client/images/provider3.jpeg')}}" width="100%" style="border-radius: 3px;"></div>
-                        <div class="col-8 mb-1">لماذا معظم الشركات الناشئة تفشل</div>
                     </div>
                 </div>
             </div>

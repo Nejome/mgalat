@@ -33,6 +33,14 @@
                             </ul>
                         </div>
 
+                        @if($errors->any())
+                            <ul class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+
                     </div>
 
                     <form method="POST" action="{{url('/admin/posts/store')}}" enctype="multipart/form-data">
@@ -68,7 +76,7 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label" >التفاصيل</label>
-                                                    <textarea name="details_ar" rows="15" class="form-control form-control-alternative">{{old('details_ar')}}</textarea>
+                                                    <textarea name="details_ar" class="editor form-control form-control-alternative">{{old('details_ar')}}</textarea>
                                                     <p class="text-danger">{{$errors->first('details_ar')}}</p>
                                                 </div>
                                             </div>
@@ -102,7 +110,7 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label" >التفاصيل</label>
-                                                    <textarea name="details_en" rows="15" class="form-control form-control-alternative">{{old('details_en')}}</textarea>
+                                                    <textarea name="details_en" class="editor form-control form-control-alternative">{{old('details_en')}}</textarea>
                                                     <p class="text-danger">{{$errors->first('details_en')}}</p>
                                                 </div>
                                             </div>

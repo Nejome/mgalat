@@ -131,6 +131,14 @@
                     </li>
                 @endcan
 
+                @can('الدعم الفني')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/support')}}">
+                            <i class="fa fa-globe text-yellow"></i>الدعم الفني
+                        </a>
+                    </li>
+                @endcan
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/logout')}}">
                         <i class="fas fa-sign-out-alt text-danger"></i> تسجيل الخروج

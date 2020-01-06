@@ -84,6 +84,7 @@ a:hover, a:focus {
 
 body {
     direction: rtl;
+    text-align: right;
     line-height: 24px;
     font-size: 14px;
     font-weight: 300;
@@ -1138,7 +1139,7 @@ button:focus {
     border: 2px solid #f29549;
 }
 
-.post-container h4, .post-container .date {
+.post-container h2, .post-container .date {
     color: #f29549;
 }
 

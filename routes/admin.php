@@ -125,8 +125,19 @@ Route::middleware('auth')->group(function() {
         Route::get('posts/create', 'admin\PostController@create');
         Route::post('posts/store', 'admin\PostController@store');
         Route::get('posts/{post}/edit', 'admin\PostController@edit');
+        Route::get('posts/{post}/comments', 'admin\PostController@comments');
+        Route::get('posts/comments/{comment}/delete', 'admin\PostController@deleteComment');
         Route::post('posts/{post}/update', 'admin\PostController@update');
         Route::get('posts/{post}/delete', 'admin\PostController@delete');
+
+    });
+
+    Route::middleware('supportManager')->group(function() {
+
+        //**********Support Routes**********//
+        Route::get('support', 'admin\SupportController@index');
+        Route::get('support/{support}/show', 'admin\SupportController@show');
+        Route::get('support/{support}/delete', 'admin\SupportController@delete');
 
     });
 

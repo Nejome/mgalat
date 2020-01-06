@@ -33,9 +33,17 @@
                             </ul>
                         </div>
 
+                        @if($errors->any())
+                            <ul class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+
                     </div>
 
-                    <form method="POST" action="{{url('/admin/posts/'.$post->id.'/store')}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{url('/admin/posts/'.$post->id.'/update')}}" enctype="multipart/form-data">
 
                         {{csrf_field()}}
 
@@ -51,7 +59,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label" >العنوان</label>
-                                                    <input type="text" name="title_ar" value="{{$post->title}}" class="form-control form-control-alternative">
+                                                    <input type="text" name="title_ar" value="{{$post->getTranslation('title', 'ar')}}" class="form-control form-control-alternative">
                                                     <p class="text-danger">{{$errors->first('title_ar')}}</p>
                                                 </div>
                                             </div>
@@ -68,7 +76,7 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label" >التفاصيل</label>
-                                                    <textarea name="details_ar" rows="15" class="form-control form-control-alternative">{{$post->details}}</textarea>
+                                                    <textarea name="details_ar" rows="15" class="form-control form-control-alternative">{{$post->getTranslation('details', 'ar')}}</textarea>
                                                     <p class="text-danger">{{$errors->first('details_ar')}}</p>
                                                 </div>
                                             </div>
@@ -98,7 +106,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label" >العنوان</label>
-                                                    <input type="text" name="title_en" value="{{$post->title}}" class="form-control form-control-alternative">
+                                                    <input type="text" name="title_en" value="{{$post->getTranslation('title', 'en')}}" class="form-control form-control-alternative">
                                                     <p class="text-danger">{{$errors->first('title_en')}}</p>
                                                 </div>
                                             </div>
@@ -108,7 +116,7 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label" >التفاصيل</label>
-                                                    <textarea name="details_en" rows="15" class="form-control form-control-alternative">{{$post->details}}</textarea>
+                                                    <textarea name="details_en" rows="15" class="form-control form-control-alternative">{{$post->getTranslation('details', 'en')}}</textarea>
                                                     <p class="text-danger">{{$errors->first('details_en')}}</p>
                                                 </div>
                                             </div>

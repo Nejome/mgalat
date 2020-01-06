@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'sdManager' => \App\Http\Middleware\sdMiddleware::class,
         'mprManager' => \App\Http\Middleware\mprMiddleware::class,
         'blogManager' => \App\Http\Middleware\blogManager::class,
+        'supportManager' => \App\Http\Middleware\supportManager::class,
 
         /*========== Laravel Localization ==========*/
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,

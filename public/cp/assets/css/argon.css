@@ -19601,7 +19601,7 @@ textarea[resize='horizontal']
     .navbar-vertical.navbar-expand-md .navbar-brand
     {
         display: block;
-        padding-top: 1rem;
+        padding-top: 0.8rem;
         /*padding-bottom: 1rem;*/
         text-align: center;
     }

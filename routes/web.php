@@ -17,20 +17,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
     Route::post('/services_providers/search', 'client\ProviderController@search');
 
-    Route::get('/blog', function () {
-        $current = 'blog';
-        return view('client.blog', compact('current'));
-    });
+    Route::get('/blog', 'client\PostController@index');
 
-    Route::get('/post', function () {
-        $current = 'blog';
-        return view('client.post', compact('current'));
-    });
+    Route::get('/blog/posts/{post}/show', 'client\PostController@show');
 
-    Route::get('/support', function () {
-        $current = 'support';
-        return view('client.support', compact('current'));
-    });
+    Route::post('/blog/posts/{post}/comment', 'client\PostController@comment');
+
+    Route::get('/support', 'client\SupportController@index');
+
+    Route::post('/support/send', 'client\SupportController@store');
 
 
 });

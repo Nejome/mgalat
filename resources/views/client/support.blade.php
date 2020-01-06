@@ -28,23 +28,41 @@
                 <div class="col-md-7 m-auto order-1 order-md-2 mb-sm-5 text-center">
                     <h1>يسعدنا تواصلكم معنا</h1>
                     <p>سنقوم بالرد علي كافة الأسئلة والاستماع الي الاقتراحات.. شكراً لتواصلكم معنا</p>
-                    <form class="row">
+
+                    @if(session()->has('created'))
+                        <div class="alert alert-success">{{session()->get('created')}}</div>
+                    @endif
+
+                    <form method="POST" action="{{url('/support/send')}}" class="row">
+
+                        {{csrf_field()}}
+
                         <div class="form-group col-md-4 mb-3">
-                            <input type="text" class="form-control" placeholder="الموضوع">
+                            <input name="subject" type="text" value="{{old('subject')}}" class="form-control" placeholder="الموضوع" required>
+                            <p class="text-danger">{{$errors->first('subject')}}</p>
                         </div>
+
                         <div class="form-group col-md-4 mb-3">
-                            <input type="text" class="form-control" placeholder="رقم الهاتف">
+                            <input name="phone" type="text" value="{{old('phone')}}" class="form-control" placeholder="رقم الهاتف" required>
+                            <p class="text-danger">{{$errors->first('phone')}}</p>
                         </div>
+
                         <div class="form-group col-md-4 mb-3">
-                            <input type="text" class="form-control" placeholder="الاسم بالكامل">
+                            <input name="name" type="text" value="{{old('name')}}" class="form-control" placeholder="الاسم بالكامل" required>
+                            <p class="text-danger">{{$errors->first('name')}}</p>
                         </div>
+
                         <div class="form-group col-12">
-                            <textarea class="form-control" rows="8" placeholder="شرح"></textarea>
+                            <textarea name="description" class="form-control" rows="8" placeholder="شرح" required>{{old('description')}}</textarea>
+                            <p class="text-danger">{{$errors->first('description')}}</p>
                         </div>
+
                         <div class="form-group m-auto">
-                            <button class="btn btn-primary pr-5 pl-5">تقديم</button>
+                            <button class="btn btn-primary pr-5 pl-5">ارسال</button>
                         </div>
+
                     </form>
+
                 </div>
 
             </div>

@@ -12,8 +12,6 @@
     <link href="{{asset('cp/assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
     <link href="{{asset('cp/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
     <link type="text/css" href="{{asset('cp/assets/css/argon.css?v=1.0.0')}}" rel="stylesheet">
-    <link type="text/css" href="{{asset('cp/editor/editor.css')}}" rel="stylesheet">
-
 
 </head>
 <body>
@@ -33,13 +31,17 @@
 <script src="{{asset('cp/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
 <script src="{{asset('cp/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 <script src="{{asset('cp/assets/js/argon.js?v=1.0.0')}}"></script>
-<script src="{{asset('cp/editor/editor.js')}}"></script>
+<script src="{{asset('cp/ckeditor/ckeditor.js')}}"></script>
 
 
-<script type="text/javascript">
-
-
-
+<script>
+    CKEDITOR.replace('details_ar', {
+        language: "ar",
+        contentsLangDirection: 'rtl',
+    });
+    CKEDITOR.replace('details_en', {
+        language: "en"
+    });
 </script>
 
 </body>

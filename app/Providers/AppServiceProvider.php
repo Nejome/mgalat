@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Post;
 use App\Provider;
 use App\City;
 use App\Setting;
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('setting', Setting::find(1));
         view()->share('g_cities', City::all());
         view()->share('g_6_providers', Provider::latest()->limit(6)->get());
+        view()->share('g_3_posts', Post::latest()->limit(3)->get());
 
     }
 }
