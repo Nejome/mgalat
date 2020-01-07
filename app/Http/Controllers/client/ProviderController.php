@@ -8,13 +8,28 @@ use App\Provider;
 use App\ProviderRating;
 use Carbon\Carbon;
 use App\Specialty;
+use App\ProviderView;
 
 class ProviderController extends Controller
 {
 
-    public function details(Provider $provider) {
+    public function details(Request $request, Provider $provider) {
 
         $current = 'departments';
+
+        $exist = ProviderView::where(['ip' => $request->ip(), 'provider_id' => $provider->id])->first();
+
+        if(!$exist){
+
+            $new = new ProviderView;
+            $new->provider_id = $provider->id;
+            $new->ip = $request->ip();
+            $new->Save();
+
+            $provider->views += 1;
+            $provider->save();
+
+        }
 
         $today = Carbon::today()->locale('en')->dayName;
 

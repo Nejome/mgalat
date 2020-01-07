@@ -23,35 +23,36 @@
 
                             <div class="row">
 
-                                <div class="col-lg-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-control-label" >الاسم</label>
                                         <p>{{$support->name}}</p>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-control-label">الموضوع</label>
+                                        <p>{{$support->subject}}</p>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-control-label">رقم الهاتف</label>
+                                        <p>{{$support->phone}}</p>
                                     </div>
                                 </div>
 
-
-                                <div class="col-lg-6">
+                                <div class="col-md-12 mt-3 mb-3">
                                     <div class="form-group">
-
+                                        <p>{{$support->description}}</p>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6 text-left mr-auto">
                                     <div class="form-group">
-
+                                        {{$support->created_at->toDayDateTimeString()}}
                                     </div>
                                 </div>
 

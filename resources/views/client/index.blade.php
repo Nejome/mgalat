@@ -10,7 +10,7 @@
         </div>
 
         <div class="banner-search-container">
-            <div class="col-md-8 m-auto">
+            <div class="col-md-7 m-auto">
 
                 <form method="POST" action="{{url('/services_providers/search')}}" class="search-form">
 
@@ -209,7 +209,7 @@
         <div class="container">
             <h4>الخيار الأسهل والأسرع لتلبية كافة احتياجاتك</h4>
             <h3 class="mb-3">مجالات تك يمكنك من الوصول الي افضل الخبرات حولك ويضعها بين يديك</h3>
-            <a href="#" class="order-now-btn">اطلب خدمتك الأن</a>
+            <a href="{{url('departments')}}" class="order-now-btn">اطلب خدمتك الأن</a>
         </div>
     </section>
 

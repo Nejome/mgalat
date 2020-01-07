@@ -81,5 +81,11 @@ class HomeController extends Controller
 
     }
 
+    public function about_us() {
+
+        return view('client.about_us');
+
+    }
+
 
 }

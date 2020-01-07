@@ -43,9 +43,9 @@ Table of Content:
     height: 100%;
 }
 
-/*#app {
+#app {
     display: none;
-}*/
+}
 
 .list_style {
   list-style: none;
@@ -88,7 +88,7 @@ body {
     line-height: 24px;
     font-size: 14px;
     font-weight: 300;
-    color: #777777;
+    color: #343a40;
 }
 
 body, html, #app {
@@ -101,7 +101,7 @@ section {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Tajawal', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 p {
@@ -741,7 +741,7 @@ button:focus {
 }
 
  .in-image {
-     width: 72px;
+     width: 71px;
      position: relative;
      top: -316px;
  }
@@ -1214,10 +1214,10 @@ button:focus {
     color: #f29549;
 }
 
-.post-section p {
+/*.post-section p {
     text-align: right;
     font-size: 18px;
-}
+}*/
 
 .slider {
     height: 65%;

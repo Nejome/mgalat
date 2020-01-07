@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-control-label">الصورة الجديدة (230 * 360)</label>
+                                            <label class="form-control-label">الصورة الجديدة (240 * 360)</label>
                                             <input type="file" name="image" class="form-control form-control-alternative">
                                             <p class="text-danger">{{$errors->first('image')}}</p>
                                         </div>

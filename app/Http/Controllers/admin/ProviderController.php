@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\ProviderRating;
 use Illuminate\Http\Request;
 use App\Provider;
 use App\City;
@@ -132,6 +133,20 @@ class ProviderController extends Controller
         $location->save();
 
         return redirect(url('admin/providers'))->with('locationUpdated', 'تم تعديل موقع مزود الخدمة بنجاح');
+
+    }
+
+    public function rates(Provider $provider) {
+
+        return view('admin.providers.rates', compact(['provider']));
+
+    }
+
+    public function deleteRate(ProviderRating $rate) {
+
+        $rate->delete();
+
+        return back()->with('deleted', 'تم حذف التقييم بنجاح');
 
     }
 

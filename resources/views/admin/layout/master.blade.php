@@ -37,11 +37,25 @@
 <script>
     CKEDITOR.replace('details_ar', {
         language: "ar",
-        contentsLangDirection: 'rtl',
     });
     CKEDITOR.replace('details_en', {
         language: "en"
     });
+
+    CKEDITOR.replace('terms_conditions_ar', {
+        language: "ar",
+    });
+    CKEDITOR.replace('terms_conditions_en', {
+        language: "en"
+    });
+
+    CKEDITOR.replace('usage_policy_ar', {
+        language: "ar",
+    });
+    CKEDITOR.replace('usage_policy_en', {
+        language: "en"
+    });
+
 </script>
 
 </body>

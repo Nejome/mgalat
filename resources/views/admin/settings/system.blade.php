@@ -61,7 +61,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" >الشروط والاحكام</label>
                                     <textarea rows="10" name="terms_conditions_ar" class="form-control form-control-alternative">
@@ -69,7 +69,7 @@
                                     </textarea>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label">سياسات الاستخدام</label>
                                     <textarea rows="10" name="usage_policy_ar" class="form-control form-control-alternative">
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" >الشروط والاحكام</label>
                                     <textarea rows="10" name="terms_conditions_en" class="form-control form-control-alternative">
@@ -110,7 +110,7 @@
                                     </textarea>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label">سياسات الاستخدام</label>
                                     <textarea rows="10" name="usage_policy_en" class="form-control form-control-alternative">

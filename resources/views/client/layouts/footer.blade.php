@@ -135,8 +135,14 @@
                     <div class="row">
 
                         @foreach($g_3_posts as $post)
-                            <div class="col-4 mb-1"><img src="{{asset('uploads/posts/'.$post->image)}}" width="100%" style="border-radius: 3px;"></div>
-                            <div class="col-8 mb-1">{{$post->title}}</div>
+                            <div class="col-4 mb-1">
+                                <a href="{{url('/blog/posts/'.$post->id.'/show')}}">
+                                    <img src="{{asset('uploads/posts/'.$post->image)}}" width="100%" style="border-radius: 3px;">
+                                </a>
+                            </div>
+                            <div class="col-8 mb-1">
+                                <a href="{{url('/blog/posts/'.$post->id.'/show')}}" style="color: #7f7f7f;">{{$post->title}}</a>
+                            </div>
                         @endforeach
 
                     </div>
@@ -171,9 +177,9 @@
         </div>
 
         <div class="text-left">
-            <a href="#" class="m-2 footer-info-link" style="color: #efefef;">الشروط والاحكام</a>
-            <a href="#" class="m-2 footer-info-link" style="color: #efefef;">سياسة الاستخدام</a>
-            <a href="#" class="m-2 footer-info-link" style="color: #efefef;">تواصل معنا</a>
+            <a href="{{url('about_us')}}" class="m-2 footer-info-link" style="color: #efefef;">الشروط والاحكام</a>
+            <a href="{{url('about_us')}}" class="m-2 footer-info-link" style="color: #efefef;">سياسة الاستخدام</a>
+            <a href="{{url('support')}}" class="m-2 footer-info-link" style="color: #efefef;">تواصل معنا</a>
         </div>
 
         <div class="border_line"></div>

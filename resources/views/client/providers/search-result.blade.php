@@ -5,7 +5,8 @@
     <section class="text-center pt-5" style="margin-top: 85px;">
         <h1>مجالات تك الرئيسية</h1>
         <p>يمكنك اختيار احد المجالات التالية للوصول الي افضل مقدمي الخدمات</p>
-        <div class="col-md-8 m-auto">
+
+        <div class="col-md-7 m-auto">
 
             <form method="POST" action="{{url('/services_providers/search')}}" class="search-form">
 
@@ -34,6 +35,7 @@
             </form>
 
         </div>
+
     </section>
 
     <input type="hidden" id="locationsCount" value="{{$providers->count()}}">

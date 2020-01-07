@@ -6,11 +6,11 @@
         <div class="application-banner-content">
             <h2 style="color: #ffffff; font-size: 34px;">أفضل مقدمي الخدمات</h2>
             <h1 style="color: #ffffff; font-size: 40px;">في مكان واحد بين يديك</h1>
-            <p>قم يتنزيل تطبيق مجالات تك علي جوالك واطلب خدمتك بكل سهولة، نوفر لك إمكانية متابعة حسابك من خلال التطبيق بسهولة ويسر، قم يتحميل التطبيق لتتعرف الميزات الان.</p>
-            <a href="{{$setting->android_link}}">
+            <p class="application-banner-text">قم يتنزيل تطبيق مجالات تك علي جوالك واطلب خدمتك بكل سهولة، نوفر لك إمكانية متابعة حسابك من خلال التطبيق بسهولة ويسر، قم يتحميل التطبيق لتتعرف الميزات الان.</p>
+            <a class="application-banner-links" href="{{$setting->android_link}}">
                 <img src="{{asset('client/images/google_play.png')}}" width="150" height="44">
             </a>
-            <a href="{{$setting->ios_link}}">
+            <a class="application-banner-links" href="{{$setting->ios_link}}">
                 <img src="{{asset('client/images/apple_store.png')}}" width="150" height="44">
             </a>
         </div>
@@ -235,7 +235,7 @@
             <h2 class="application-title phone-under-line text-center mb-5">صور من التطبيق</h2>
             <div class="row">
                 @foreach($images as $image)
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-2">
                         <img src="{{asset('uploads/applicationImages/'.$image->image)}}" alt="{{$image->title}}" width="100%" height="280px">
                     </div>
                 @endforeach

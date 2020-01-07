@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{asset('client/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('client/css/responsive.css')}}">
 
-    {{--<img id="loading" src="{{asset('client/images/loading2.gif')}}">--}}
+    <img id="loading" src="{{asset('client/images/loading2.gif')}}">
 
 </head>
 
@@ -41,10 +41,10 @@
 <script src="{{asset('client/myJs/searchMap.js')}}"></script>
 
 <script>
-    $/*(window).on('load', function(){
+    $(window).on('load', function(){
         $("#app").fadeIn(1000);
         $('#loading').hide();
-    });*/
+    });
 </script>
 
 

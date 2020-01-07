@@ -27,6 +27,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
     Route::post('/support/send', 'client\SupportController@store');
 
+    Route::get('/about_us', 'client\HomeController@about_us');
 
 });
 

@@ -115,6 +115,8 @@ Route::middleware('auth')->group(function() {
 
         Route::get('providers/{provider}/location', 'admin\ProviderController@location');
         Route::post('providers/{provider}/updateLocation', 'admin\ProviderController@updateLocation');
+        Route::get('providers/{provider}/rates', 'admin\ProviderController@rates');
+        Route::get('providers/rates/{rate}/delete', 'admin\ProviderController@deleteRate');
 
     });
 

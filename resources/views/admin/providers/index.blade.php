@@ -102,6 +102,7 @@
                                 <th scope="col">الاسم</th>
                                 <th scope="col">المدينة</th>
                                 <th scope="col">التخصص</th>
+                                <th scope="col">المشاهدات</th>
                                 <th scope="col">مميز ؟</th>
                                 <th scope="col">النشاط</th>
                                 <th scope="col">الحالة</th>
@@ -118,6 +119,8 @@
                                     <td>{{$provider->city->title}}</td>
 
                                     <td>{{$provider->specialty->title}}</td>
+
+                                    <td>{{$provider->views}}</td>
 
                                     <td>
                                         @if($provider->is_special == 1)
@@ -161,13 +164,17 @@
 
                                         @endcan
 
-                                            @can('عرض بيانات وتحديد مواقع مزودي الخدمات')
+                                        @can('عرض بيانات وتحديد مواقع مزودي الخدمات')
 
-                                                <a href="{{url('admin/providers/'.$provider->id.'/location')}}" data-toggle="tooltip" data-placement="top" data-original-title="الموقع">
-                                                    <i class="fa fa-map-marker text-muted"></i>
-                                                </a>&nbsp;&nbsp;&nbsp;
+                                            <a href="{{url('admin/providers/'.$provider->id.'/location')}}" data-toggle="tooltip" data-placement="top" data-original-title="الموقع">
+                                                <i class="fa fa-map-marker text-muted"></i>
+                                            </a>&nbsp;&nbsp;&nbsp;
 
-                                            @endcan
+                                            <a href="{{url('admin/providers/'.$provider->id.'/rates')}}" data-toggle="tooltip" data-placement="top" data-original-title="التقييمات">
+                                                <i class="fa fa-users"></i>
+                                            </a>&nbsp;&nbsp;&nbsp;
+
+                                        @endcan
 
                                         @canany(['قبول رفض وتعطيل اعلان مزودي الخدمات', 'عرض بيانات وتحديد مواقع مزودي الخدمات'])
                                             <a href="#" data-toggle="tooltip" data-placement="top" data-original-title="عرض">
