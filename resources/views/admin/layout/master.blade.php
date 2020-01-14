@@ -35,6 +35,7 @@
 
 
 <script>
+
     CKEDITOR.replace('details_ar', {
         language: "ar",
     });
@@ -54,6 +55,22 @@
     });
     CKEDITOR.replace('usage_policy_en', {
         language: "en"
+    });
+
+</script>
+
+<script>
+
+    $('input[type=radio][name=is_special]').change(function() {
+
+        if (this.value == 1) {
+            $('input[type=date][name=special_until]').prop('disabled', false)
+        }
+        else if (this.value == '0') {
+            $('input[type=date][name=special_until]').prop('disabled', true)
+            .val('');
+        }
+
     });
 
 </script>

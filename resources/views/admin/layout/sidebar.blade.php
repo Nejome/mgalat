@@ -108,8 +108,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/admin/cities')}}">
-                            <i class="fas fa-flag text-yellow"></i> المدن
+                        <a class="nav-link" href="{{url('/admin/countries')}}">
+                            <i class="fas fa-flag text-yellow"></i> الدول
                         </a>
                     </li>
 

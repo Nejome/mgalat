@@ -100,7 +100,7 @@
                             <thead class="thead-light">
                             <tr class="text-center">
                                 <th scope="col">الاسم</th>
-                                <th scope="col">المدينة</th>
+                                <th scope="col">الدولة</th>
                                 <th scope="col">التخصص</th>
                                 <th scope="col">المشاهدات</th>
                                 <th scope="col">مميز ؟</th>
@@ -116,7 +116,7 @@
 
                                     <td>{{$provider->name}}</td>
 
-                                    <td>{{$provider->city->title}}</td>
+                                    <td>{{$provider->country->title}}</td>
 
                                     <td>{{$provider->specialty->title}}</td>
 
@@ -170,10 +170,6 @@
                                                 <i class="fa fa-map-marker text-muted"></i>
                                             </a>&nbsp;&nbsp;&nbsp;
 
-                                            <a href="{{url('admin/providers/'.$provider->id.'/rates')}}" data-toggle="tooltip" data-placement="top" data-original-title="التقييمات">
-                                                <i class="fa fa-users"></i>
-                                            </a>&nbsp;&nbsp;&nbsp;
-
                                         @endcan
 
                                         @canany(['قبول رفض وتعطيل اعلان مزودي الخدمات', 'عرض بيانات وتحديد مواقع مزودي الخدمات'])
@@ -198,6 +194,10 @@
 
                                             <a href="{{url('admin/providers/'.$provider->id.'/images')}}" data-toggle="tooltip" data-placement="top" data-original-title="صور مزود الخدمة">
                                                 <i class="fa fa-images text-success"></i>
+                                            </a>&nbsp;&nbsp;&nbsp;
+
+                                            <a href="{{url('admin/providers/'.$provider->id.'/rates')}}" data-toggle="tooltip" data-placement="top" data-original-title="التقييمات">
+                                                <i class="fa fa-users"></i>
                                             </a>&nbsp;&nbsp;&nbsp;
 
                                             <a href="#" onclick="delete_confirm('{{$provider->id}}', '{{url('admin/providers/'.$provider->id.'/delete')}}')" data-toggle="tooltip" data-placement="top" data-original-title="حذف">

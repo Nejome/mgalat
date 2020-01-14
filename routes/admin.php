@@ -87,13 +87,13 @@ Route::middleware('auth')->group(function() {
         Route::post('specialties/{specialty}/update', 'admin\SpecialtyController@update');
         Route::get('specialties/{specialty}/delete', 'admin\SpecialtyController@delete');
 
-        //**********Cities Routes**********//
-        Route::get('cities', 'admin\CityController@index');
-        Route::get('cities/create', 'admin\CityController@create');
-        Route::post('cities/store', 'admin\CityController@store');
-        Route::get('cities/{city}/edit', 'admin\CityController@edit');
-        Route::post('cities/{city}/update', 'admin\CityController@update');
-        Route::get('cities/{city}/delete', 'admin\CityController@delete');
+        //**********Countries Routes**********//
+        Route::get('countries', 'admin\CountryController@index');
+        Route::get('countries/create', 'admin\CountryController@create');
+        Route::post('countries/store', 'admin\CountryController@store');
+        Route::get('countries/{country}/edit', 'admin\CountryController@edit');
+        Route::post('countries/{country}/update', 'admin\CountryController@update');
+        Route::get('countries/{country}/delete', 'admin\CountryController@delete');
 
     });
 

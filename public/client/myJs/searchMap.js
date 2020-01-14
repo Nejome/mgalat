@@ -11,7 +11,7 @@ if(locationsCount > 0) {
         zoom: 10
     };
 
-    map = new google.maps.Map(document.getElementById('searchMap'), mapOptions);
+    map = new google.maps.Map(document.getElementById('searchResultMap'), mapOptions);
 
     for (var i = 1; i <= locationsCount; i++) {
 

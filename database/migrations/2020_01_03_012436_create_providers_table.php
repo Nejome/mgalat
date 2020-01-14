@@ -16,7 +16,7 @@ class CreateProvidersTable extends Migration
         Schema::create('providers', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->bigInteger('city_id')->unsigned();
+            $table->bigInteger('country_id')->unsigned();
             $table->bigInteger('specialty_id')->unsigned();
 
             $table->string('name');
@@ -32,12 +32,14 @@ class CreateProvidersTable extends Migration
             $table->string('email')->unique()->nullable();
 
             $table->integer('status')->default(0); /* 0=offline , 1=online*/
-            $table->integer('is_special')->default(0);
             $table->integer('active')->default(0); /* 0=pending , 1=active , 3=disabled */
+
+            $table->integer('is_special')->default(0);
+            $table->date('special_until')->nullable();
 
             $table->string('image');
 
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('specialty_id')->references('id')->on('specialties');
 
             $table->timestamps();

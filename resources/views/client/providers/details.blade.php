@@ -824,7 +824,7 @@
                             <input id="lng" type="hidden" value="{{$provider->location->lng}}">
                             <input id="icon" type="hidden" value="{{asset('client/images/placeholder.svg')}}">
                             <input id="image" type="hidden" value="{{asset('uploads/providers/'.$provider->image)}}">
-                            <input id="city" type="hidden" value="{{$provider->city->title}}">
+                            <input id="city" type="hidden" value="{{$provider->country->title}}">
 
                             <a href="#" class="show-location-btn m-auto" data-toggle="modal" data-target="#locationModel">اظهار الموقع</a>
 
@@ -888,8 +888,8 @@
                                 </div>
                             </div>
                             <div class="col-6 ml-auto p-0">
-                                <h3 class="m-0" style="color: #7f7f7f;">المدينة</h3>
-                                <h5 class="m-0" style="color: #c3c3c3;">{{$provider->city->title}}</h5>
+                                <h3 class="m-0" style="color: #7f7f7f;">الدولة</h3>
+                                <h5 class="m-0" style="color: #c3c3c3;">{{$provider->country->title}}</h5>
                             </div>
                         </div>
                     </div>

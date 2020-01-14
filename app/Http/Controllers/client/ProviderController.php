@@ -9,6 +9,7 @@ use App\ProviderRating;
 use Carbon\Carbon;
 use App\Specialty;
 use App\ProviderView;
+use Illuminate\Support\Facades\DB;
 
 class ProviderController extends Controller
 {
@@ -64,10 +65,25 @@ class ProviderController extends Controller
 
     public function search(Request $request) {
 
+        $message = [
+            'text.required' => 'عفوا قم بإدخال نص البحث',
+            'lat.required' => 'عفوا قم بتحدد موقعك عن طريق الضغط علي زر تحديد الموقع',
+        ];
+
+        $this->validate($request, [
+           'text' => 'required',
+           'lat' => 'required'
+        ], $message);
+
         $current = 'departments';
 
-        $specialties = Specialty::where('title->ar','LIKE','%'.$request->text.'%')->get();
+        $close_providers = DB::select(DB::raw('SELECT id, ( 3959 * acos( cos( radians(' . $request->lat . ') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(' . $request->lng . ') ) + sin( radians(' . $request->lat .') ) * sin( radians(lat) ) ) ) AS distance FROM provider_locations HAVING distance < ' . 51 . ' ORDER BY distance') );
+        $close_providers_id = [];
+        foreach ($close_providers as $row){
+            $close_providers_id[] = $row->id;
+        }
 
+        $specialties = Specialty::where('title->ar','LIKE','%'.$request->text.'%')->get();
         $specialties_id = [];
         foreach ($specialties as $row){
             $specialties_id[] = $row->id;
@@ -76,7 +92,10 @@ class ProviderController extends Controller
         $special_providers_count = 0;
         $normal_providers_count = 0;
 
-        $providers = Provider::whereIn('specialty_id', $specialties_id)->where('city_id', $request->city)->OrderBy('is_special', 'desc')->get();
+        $providers = Provider::whereIn('id', $close_providers_id)
+            ->whereIn('specialty_id', $specialties_id)
+            ->OrderBy('is_special', 'desc')
+            ->get();
 
         foreach($providers as $provider) {
             if($provider->is_special == 1) {

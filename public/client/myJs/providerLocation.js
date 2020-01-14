@@ -20,7 +20,7 @@ var windowContent = `
                                 <img src="`+image+`" style="width: 50px; height: 50px; border-radius: 50%;">
                             </div>
                             <div style="width: 70%; float: right;text-align: right;">
-                                <p class="marker-window-text"> مدينة `+city+`</p>
+                                <p class="marker-window-text">`+city+`</p>
                             </div>
                         </div>
 `;

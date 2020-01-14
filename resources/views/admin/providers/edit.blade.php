@@ -45,14 +45,14 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
-                                            <label class="form-control-label" >المدينة</label>
-                                            <select name="city_id" class="form-control form-control-alternative">
-                                                <option disabled selected>اختر المدينة</option>
-                                                @foreach($cities as $city)
-                                                    <option value="{{$city->id}}" @if($city->id == $provider->city_id) selected @endif> {{$city->title}} </option>
+                                            <label class="form-control-label" >الدولة</label>
+                                            <select name="country_id" class="form-control form-control-alternative">
+                                                <option disabled selected>اختر الدولة</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{$country->id}}" @if($country->id == $provider->country_id) selected @endif> {{$country->title}} </option>
                                                 @endforeach
                                             </select>
-                                            <p class="text-danger">{{$errors->first('city_id')}}</p>
+                                            <p class="text-danger">{{$errors->first('country_id')}}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -83,7 +83,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
                                             <label class="form-control-label" >الصورة الحالية</label>
-                                            <img src="{{asset('uploads/providers/'.$provider->image)}}" width="100%">
+                                            <img src="{{asset('uploads/providers/'.$provider->image)}}" width="100%" height="300px">
                                             <p class="text-danger">{{$errors->first('image')}}</p>
                                         </div>
                                     </div>
@@ -111,6 +111,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">مميز حتي</label>
+                                            <input type="date" name="special_until" value="{{$provider->special_until}}" class="form-control form-control-alternative" @if($provider->is_special != 1) disabled @endif>
+                                            <p class="text-danger">{{$errors->first('special_until')}}</p>
                                         </div>
                                     </div>
                                 </div>

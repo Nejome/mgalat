@@ -39,6 +39,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKUtiN-bHruEDPRjKN_-qjq1Kg8WAOjUI"></script>
 <script src="{{asset('client/myJs/providerLocation.js')}}"></script>
 <script src="{{asset('client/myJs/searchMap.js')}}"></script>
+<script src="{{asset('client/myJs/searchForm.js')}}"></script>
 
 <script>
     $(window).on('load', function(){

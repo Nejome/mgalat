@@ -11,7 +11,7 @@
 
                         <div class="row align-items-center">
                             <div class="col">
-                                <h2 class="mb-0">المستخدمين</h2>
+                                <h2 class="mb-0">المدراء</h2>
                             </div>
                             <div class="col-4 text-left">
                                 <a href="{{url('admin/users/create')}}" class="btn btn-sm btn-primary">اضافة مدير</a>

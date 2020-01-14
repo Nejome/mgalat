@@ -93,8 +93,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">المدن</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{$g_cities_count}}</span>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">الدول</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{$g_countries_count}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">

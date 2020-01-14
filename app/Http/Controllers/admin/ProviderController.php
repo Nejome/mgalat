@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\ProviderRating;
 use Illuminate\Http\Request;
 use App\Provider;
-use App\City;
+use App\Country;
 use App\Specialty;
 use App\ProviderLocation;
 use App\WorkingDayes;
@@ -16,7 +16,7 @@ class ProviderController extends Controller
 
     public function index() {
 
-       $providers = Provider::paginate(5);
+       $providers = Provider::latest()->paginate(5);
 
        return view('admin.providers.index', compact(['providers']));
 
@@ -24,11 +24,11 @@ class ProviderController extends Controller
 
     public function create() {
 
-        $cities = City::all();
+        $countries = Country::all();
 
         $specialties = Specialty::all();
 
-        return view('admin.providers.create', compact(['cities', 'specialties']));
+        return view('admin.providers.create', compact(['countries', 'specialties']));
 
     }
 
@@ -37,18 +37,26 @@ class ProviderController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required|numeric|unique:providers',
-            'city_id' => 'required',
+            'country_id' => 'required',
             'specialty_id' => 'required',
             'image' => 'required|image'
         ]);
 
+        $provider = new Provider;
+
+        if($request->is_special == 1) {
+            $this->validate($request, [
+                'special_until' => 'required|date'
+            ]);
+            $provider->special_until = $request->special_until;
+        }
+
         $image = time().'.'.request()->image->getClientOriginalExtension();
         $request->image->move(public_path('uploads/providers/'), $image);
 
-        $provider = new Provider;
         $provider->name = $request->name;
         $provider->phone = $request->phone;
-        $provider->city_id = $request->city_id;
+        $provider->country_id = $request->country_id;
         $provider->specialty_id = $request->specialty_id;
         $provider->description = $request->description;
         $provider->image = $image;
@@ -152,11 +160,11 @@ class ProviderController extends Controller
 
     public function edit(Provider $provider) {
 
-        $cities = City::all();
+        $countries = Country::all();
 
         $specialties = Specialty::all();
 
-        return view('admin.providers.edit', compact(['provider', 'cities', 'specialties']));
+        return view('admin.providers.edit', compact(['provider', 'countries', 'specialties']));
 
     }
 
@@ -165,13 +173,24 @@ class ProviderController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required|numeric',
-            'city_id' => 'required',
+            'country_id' => 'required',
             'specialty_id' => 'required',
             'image' => 'image'
         ]);
 
         if($provider->phone != $request->phone){
             $this->validate($request, ['phone' => 'unique:providers']);
+        }
+
+        if($request->is_special == 1) {
+            $this->validate($request, [
+                'special_until' => 'required|date'
+            ]);
+            $provider->special_until = $request->special_until;
+        }
+
+        if($request->is_special == 0) {
+            $provider->special_until = null;
         }
 
         if(isset($request->image) && $request->image != ''){
@@ -185,7 +204,7 @@ class ProviderController extends Controller
 
         $provider->name = $request->name;
         $provider->phone = $request->phone;
-        $provider->city_id = $request->city_id;
+        $provider->country_id = $request->country_id;
         $provider->specialty_id = $request->specialty_id;
         $provider->description = $request->description;
         $provider->is_special = $request->is_special;

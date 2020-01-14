@@ -3,13 +3,29 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Provider extends Model
 {
 
-    public function city() {
+    public static function boot() {
+        parent::boot();
+        $today = Carbon::today();
+        $special_providers = static::where('is_special', 1)->get();
+        foreach($special_providers as $row) {
+            $special_until = Carbon::parse($row->special_until);
+            if($special_until->lt($today)){
+                $row->is_special = 0;
+                $row->special_until = null;
+                $row->save();
 
-        return $this->belongsTo('App\City');
+            }
+        }
+    }
+
+    public function country() {
+
+        return $this->belongsTo('App\Country');
 
     }
 

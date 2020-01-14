@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class City extends Model
+class Country extends Model
 {
 
     use HasTranslations;

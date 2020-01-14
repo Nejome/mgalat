@@ -3,38 +3,11 @@
 @section('content')
 
     <section class="text-center pt-5" style="margin-top: 85px;">
+
         <h1>مجالات تك الرئيسية</h1>
         <p>يمكنك اختيار احد المجالات التالية للوصول الي افضل مقدمي الخدمات</p>
 
-        <div class="col-md-7 m-auto">
-
-            <form method="POST" action="{{url('/services_providers/search')}}" class="search-form">
-
-                {{csrf_field()}}
-
-                <div class="row">
-
-                    <div class="col-md-4 m-1 m-md-0 p-0">
-                        <select name="city">
-                            @foreach($g_cities as $city)
-                                <option value="{{$city->id}}">{{$city->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 m-1 m-md-0 p-0">
-                        <input type="text" name="text" placeholder="كلمة البحث" required>
-                    </div>
-
-                    <div class="col-md-2 m-1 m-md-0 p-0">
-                        <button type="submit" class="search-btn pt-2"><i class="fa fa-search"></i></button>
-                    </div>
-
-                </div>
-
-            </form>
-
-        </div>
+        @include('client.layouts.searchForm')
 
     </section>
 
@@ -56,7 +29,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div id="searchMap" style="width: 100%; height: 450px;"></div>
+                        <div id="searchResultMap" style="width: 100%; height: 450px;"></div>
                     </div>
                 </div>
             </div>
@@ -80,7 +53,7 @@
             <div class="row">
                 @if($providers->count() > 0)
                     @foreach($providers as $row)
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <img src="{{asset('uploads/providers/'.$row->image)}}" width="100%" height="200px">
                             <div class="text-right mt-3">
                                 <span style="font-size: 16px;">{{$row->specialty->title}}</span>

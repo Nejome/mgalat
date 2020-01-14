@@ -4552,6 +4552,10 @@ tbody.collapse.show {
   color: inherit;
 }
 
+.alert-dismissible .close:hover {
+    cursor: pointer;
+}
+
 .alert-primary {
   color: #004085;
   background-color: #cce5ff;
@@ -5105,6 +5109,10 @@ button.close {
 .modal-header .close {
   padding: 15px;
   margin: -15px auto -15px -15px;
+}
+
+.modal-header .close:hover {
+    cursor: pointer;
 }
 
 .modal-title {
