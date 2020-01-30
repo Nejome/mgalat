@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Provider;
 use Illuminate\Http\Request;
 use App\Support;
 use App\Post;
@@ -16,7 +17,9 @@ class HomeController extends Controller
 
         $last_5_support = Support::latest()->limit(5)->get();
 
-        return view('admin.index', compact(['last_5_posts', 'last_5_support']));
+        $new_providers = Provider::where('active', 0)->get();
+
+        return view('admin.index', compact(['last_5_posts', 'last_5_support', 'new_providers']));
 
     }
 

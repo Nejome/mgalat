@@ -6,7 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{asset('client/images/favicon.svg')}}" type="image/png">
-    <title>مجالات تك</title>
+    <title>{{$setting->title}}</title>
+
+    <meta name="description" content="{{$setting->description}}">
+    <meta name="keywords" content="{{$setting->keywords}}">
+    <meta name="author" content="{{$setting->author}}">
 
     <link rel="stylesheet" href="{{asset('client/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}">
@@ -40,6 +44,7 @@
 <script src="{{asset('client/myJs/providerLocation.js')}}"></script>
 <script src="{{asset('client/myJs/searchMap.js')}}"></script>
 <script src="{{asset('client/myJs/searchForm.js')}}"></script>
+<script src="{{asset('client/myJs/departmentMap.js')}}"></script>
 
 <script>
     $(window).on('load', function(){

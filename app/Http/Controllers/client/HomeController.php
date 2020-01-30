@@ -77,7 +77,14 @@ class HomeController extends Controller
             }
         }
 
-        return view('client.departments.show', compact(['current', 'department', 'specialties', 'providers', 'special_providers_count', 'normal_providers_count']));
+        $special_providers = [];
+        foreach($providers as $provider) {
+            if($provider->is_special == 1) {
+                $special_providers[] = $provider;
+            }
+        }
+
+        return view('client.departments.show', compact(['current', 'department', 'specialties', 'providers', 'special_providers_count', 'normal_providers_count', 'special_providers']));
 
     }
 

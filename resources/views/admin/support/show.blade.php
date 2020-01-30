@@ -32,8 +32,8 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-control-label">الموضوع</label>
-                                        <p>{{$support->subject}}</p>
+                                        <label class="form-control-label">البريد الالكتروني</label>
+                                        <p>{{$support->email}}</p>
                                     </div>
                                 </div>
 
@@ -41,6 +41,13 @@
                                     <div class="form-group">
                                         <label class="form-control-label">رقم الهاتف</label>
                                         <p>{{$support->phone}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">الموضوع</label>
+                                        <p>{{$support->subject}}</p>
                                     </div>
                                 </div>
 

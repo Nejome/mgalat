@@ -18,6 +18,8 @@
         @foreach($providers as $row)
             <input type="hidden" id="image{{$x}}" value="{{asset('uploads/providers/'.$row->image)}}">
             <input type="hidden" id="name{{$x}}" value="{{$row->name}}">
+            <input type="hidden" id="specialty{{$x}}" value="{{$row->specialty->title}}">
+            <input type="hidden" id="rate{{$x}}" value="{{$row->ratingTotal()}}">
             <input type="hidden" id="lat{{$x}}" value="{{$row->location->lat}}">
             <input type="hidden" id="lng{{$x}}" value="{{$row->location->lng}}">
             @php $x = $x +1; @endphp
@@ -54,7 +56,9 @@
                 @if($providers->count() > 0)
                     @foreach($providers as $row)
                         <div class="col-md-4 mb-4">
-                            <img src="{{asset('uploads/providers/'.$row->image)}}" width="100%" height="200px">
+                            <a href="{{url('/services_providers/'.$row->id.'/details')}}">
+                                <img src="{{asset('uploads/providers/'.$row->image)}}" width="100%" height="230px">
+                            </a>
                             <div class="text-right mt-3">
                                 <span style="font-size: 16px;">{{$row->specialty->title}}</span>
                                 <a href="{{url('/services_providers/'.$row->id.'/details')}}"><h3 style="margin-bottom: 0;">{{$row->name}}</h3></a>

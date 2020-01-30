@@ -173,7 +173,7 @@
                                         @endcan
 
                                         @canany(['قبول رفض وتعطيل اعلان مزودي الخدمات', 'عرض بيانات وتحديد مواقع مزودي الخدمات'])
-                                            <a href="#" data-toggle="tooltip" data-placement="top" data-original-title="عرض">
+                                            <a href="{{url('admin/providers/'.$provider->id.'/show')}}" data-toggle="tooltip" data-placement="top" data-original-title="عرض">
                                                 <i class="fas fa-eye text-primary"></i>
                                             </a>&nbsp;&nbsp;&nbsp;
                                         @endcanany

@@ -6,16 +6,16 @@ var mapOptions = {
     center: defaultLocation
 };
 
-var map = new google.maps.Map(
+var searchMap = new google.maps.Map(
     document.getElementById('searchMap'), mapOptions);
 
-var marker = new google.maps.Marker({
+var searchMarker = new google.maps.Marker({
     position: defaultLocation,
-    map: map
+    map: searchMap
 });
 
-google.maps.event.addListener(map, 'click', function(event) {
-    placeMarker(map, event.latLng, marker);
+google.maps.event.addListener(searchMap, 'click', function(event) {
+    placeMarker(searchMap, event.latLng, searchMarker);
 });
 
 function placeMarker(map, location, marker) {
@@ -26,3 +26,4 @@ function placeMarker(map, location, marker) {
     document.getElementById("lng").value = marker.getPosition().lng();
 
 }
+

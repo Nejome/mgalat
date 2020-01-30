@@ -17,13 +17,15 @@
 
                 @foreach($departments as $department)
                     <div class="col-md-4 mb-3">
-                        <img src="{{asset('uploads/departmentsImages/'.$department->image)}}" width="100%" height="240px">
-                        <div class="service-figure">
-                        <span style="background-color: {{$department->color}};">
-                            <img src="{{asset('uploads/svg/'.$department->icon)}}">
-                        </span>
-                            <a href="{{url('departments/'.$department->id.'/show')}}" class="department-title">{{$department->title}}</a>
-                        </div>
+                        <a href="{{url('/departments/'.$department->id.'/show')}}">
+                            <img src="{{asset('uploads/departmentsImages/'.$department->image)}}" width="100%" height="240px">
+                            <div class="service-figure">
+                                <span style="background-color: {{$department->color}} !important;">
+                                    <img src="{{asset('uploads/svg/'.$department->icon)}}">
+                                </span>
+                                <p class="department-title">{{$department->title}}</p>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
 

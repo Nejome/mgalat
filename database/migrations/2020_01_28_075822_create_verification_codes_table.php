@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupportsTable extends Migration
+class CreateVerificationCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSupportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supports', function (Blueprint $table) {
+        Schema::create('verification_codes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('subject');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('name');
-            $table->text('description');
+            $table->string('phone')->unique();
+            $table->string('code');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateSupportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supports');
+        Schema::dropIfExists('verification_codes');
     }
 }

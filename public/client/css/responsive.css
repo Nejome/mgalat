@@ -254,6 +254,25 @@
 }
 @media(max-width: 767px){
 
+    .verification-code-section {
+        margin-top: 100px;
+    }
+
+    .application-banner {
+        background-image: url("../images/application-banner-phone.jpg");
+        padding-top: 250px;
+        height: 91%;
+    }
+
+    .application-banner-text {
+        display: none;
+    }
+
+    .application-banner-links {
+        display: inline-block;
+        margin:  auto;
+    }
+
     .search-form select {
         border: 1px solid #c3c3c3 !important;
     }
@@ -377,6 +396,7 @@
     .application-banner {
         background-image: url("../images/application-banner-phone.jpg");
         padding-top: 250px;
+        height: 91%;
     }
 
     .application-banner-text {

@@ -7,11 +7,11 @@ if(locationsCount > 0) {
     var mapOptions = {center: new google.maps.LatLng(
             document.getElementById('lat1').value,
             document.getElementById('lng1').value
-            ),
+        ),
         zoom: 10
     };
 
-    map = new google.maps.Map(document.getElementById('searchResultMap'), mapOptions);
+    map = new google.maps.Map(document.getElementById('departmentMap'), mapOptions);
 
     for (var i = 1; i <= locationsCount; i++) {
 

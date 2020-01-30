@@ -20,7 +20,7 @@
             <div class="row">
                 @php $x = 1; @endphp
                 @foreach($provider->images as $row)
-                    <div class="col-4 col-md-2">
+                    <div class="col-4 col-md-2 mb-2">
                         <img class="demo cursor" src="{{asset('uploads/providers_images/'.$row->image)}}" style="width:100%; height: 110px;object-fit: fill;" onclick="currentSlide({{$x}})" alt="{{$row->title}}">
                     </div>
                     @php $x = $x + 1; @endphp
@@ -824,7 +824,9 @@
                             <input id="lng" type="hidden" value="{{$provider->location->lng}}">
                             <input id="icon" type="hidden" value="{{asset('client/images/placeholder.svg')}}">
                             <input id="image" type="hidden" value="{{asset('uploads/providers/'.$provider->image)}}">
-                            <input id="city" type="hidden" value="{{$provider->country->title}}">
+                            <input id="specialty" type="hidden" value="{{$provider->specialty->title}}">
+                            <input id="name" type="hidden" value="{{$provider->name}}">
+                            <input id="rate" type="hidden" value="{{$provider->ratingTotal()}}">
 
                             <a href="#" class="show-location-btn m-auto" data-toggle="modal" data-target="#locationModel">اظهار الموقع</a>
 

@@ -1100,6 +1100,7 @@ button:focus {
 }
 
 .service-figure span {
+    display: inline-block;
     width: 70px;
     height: 70px;
     font-size: 30px;
@@ -1308,23 +1309,8 @@ button:focus {
     border-radius: 13px 13px 0 0;
 }
 
-.marker-window {
-    width: 250px;
-    height: 60px;
-    background: #fff;
-    box-shadow: 1px 1px 4px 2px #ccc;
-    padding: 5px 10px;
-}
-
-.marker-window-image-container {
-    border-left: 2px solid #ccc;
-}
-
-.marker-window-text {
-    font-size: 18px;
-    margin-top: 0.86rem !important;
-    margin-right: 8px;
-    font-weight: 700;
+.info-window-text {
+    font-family: 'Tajawal';
 }
 
 .contact-icon {

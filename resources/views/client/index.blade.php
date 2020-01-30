@@ -20,7 +20,7 @@
     <section class="steps-area">
         <div class="container">
             <h3 class="section-title">كيف تطلب خدمتك من مجالات تك ؟</h3>
-            <div class="row mt-5">
+            <div class="row mt-md-5 mt-1">
                 <div class="col-md-4 p-0 pt-5">
                     <div class="step-card">
                         <svg xmlns="http://www.w3.org/2000/svg" height="480pt" viewBox="0 -19 480 479" width="480pt"><path d="m408 208.5h-96v-80c0-13.601562-10.398438-24-24-24h-8c-13.601562 0-24 10.398438-24 24v104h-16c-13.601562 0-24 10.398438-24 24v58.398438l48 88v37.601562h144v-38.398438l24-56v-113.601562c0-13.601562-10.398438-24-24-24zm-128 216v-16h112v16zm136-81.601562-21.601562 49.601562h-117.597657l-44.800781-82.398438v-53.601562c0-4.800781 3.199219-8 8-8h16v32h16v-152c0-4.800781 3.199219-8 8-8h8c4.800781 0 8 3.199219 8 8v136h16v-40h24v40h16v-40h24v40h16v-40h16c4.800781 0 8 3.199219 8 8zm0 0"></path><path d="m376 350.101562-14.398438 21.597657 12.796876 9.601562 17.601562-26.402343v-34.398438h-16zm0 0"></path><path d="m456 .5h-432c-13.601562 0-24 10.398438-24 24v304c0 13.601562 10.398438 24 24 24h184v-16h-184c-4.800781 0-8-3.199219-8-8v-304c0-4.800781 3.199219-8 8-8h432c4.800781 0 8 3.199219 8 8v304c0 4.800781-3.199219 8-8 8h-8v16h8c13.601562 0 24-10.398438 24-24v-304c0-13.601562-10.398438-24-24-24zm0 0"></path><path d="m40 72.5h176v16h-176zm0 0"></path><path d="m344 72.5h96v16h-96zm0 0"></path><path d="m88 128.5c-26.398438 0-48 21.601562-48 48s21.601562 48 48 48 48-21.601562 48-48-21.601562-48-48-48zm0 80c-17.601562 0-32-14.398438-32-32s14.398438-32 32-32 32 14.398438 32 32-14.398438 32-32 32zm0 0"></path><path d="m152 168.5h88v16h-88zm0 0"></path><path d="m328 168.5h112v16h-112zm0 0"></path><path d="m200 240.5v-16c-26.398438 0-48 21.601562-48 48s21.601562 48 48 48v-16c-17.601562 0-32-14.398438-32-32s14.398438-32 32-32zm0 0"></path><path d="m40 264.5h96v16h-96zm0 0"></path><path d="m324 99.699219c10.398438-24-.800781-52.800781-24.800781-63.199219s-52.800781.800781-63.199219 24.800781c-5.601562 12-5.601562 26.398438 0 38.398438l14.398438-6.398438c-5.597657-12-2.398438-26.402343 6.402343-35.199219 12.800781-12 32.800781-12 45.597657 0 9.601562 9.597657 12 23.199219 6.402343 35.199219zm0 0"></path></svg>
@@ -190,13 +190,15 @@
     <section class="latest-provider">
         <div class="container">
 
-            <h3 class="section-title text-center mb-5">أحدث مقدمي الخدمات</h3>
+            <h3 class="section-title text-center mb-md-5 mb-3">أحدث مقدمي الخدمات</h3>
 
             <div class="row">
 
                 @foreach($g_6_providers as $row)
                     <div class="col-md-4 mb-4">
-                        <img src="{{asset('uploads/providers/'.$row->image)}}" width="100%" height="230px">
+                        <a href="{{url('/services_providers/'.$row->id.'/details')}}">
+                            <img src="{{asset('uploads/providers/'.$row->image)}}" width="100%" height="230px">
+                        </a>
                         <div class="text-right mt-3">
                             <span style="font-size: 16px;">{{$row->specialty->title}}</span>
                             <a href="{{url('/services_providers/'.$row->id.'/details')}}"><h3 style="margin-bottom: 0;">{{$row->name}}</h3></a>
@@ -228,25 +230,32 @@
     <section class="latest-articles mb-5">
         <div class="container">
 
-            <h3 class="section-title text-center mb-5">أحدث المقالات</h3>
+            <h6 class="section-title text-center mb-md-5 mb-3">أحدث المقالات</h6>
 
             <div class="row">
 
-                @foreach($g_3_posts as $post)
-                    <div class="col-md-4 mb-5">
-                        <img src="{{asset('uploads/posts/'.$post->image)}}" width="100%" height="180px">
-                        <div class="text-right home-article-link mt-3">
-                            {{$post->created_at->toDayDateTimeString()}}
-                            <h3>{{$post->title}}</h3>
-                            <a href="{{url('/blog/posts/'.$post->id.'/show')}}">
-                                <span><i class="fa fa-th-large"></i></span>
-                                أقرا المزيد
-                            </a>
+                @if($g_3_posts->count())
+                    @foreach($g_3_posts as $post)
+                        <div class="col-md-4 mb-5">
+                            <img src="{{asset('uploads/posts/'.$post->image)}}" width="100%" height="180px">
+                            <div class="text-right home-article-link mt-3">
+                                {{$post->created_at->toDayDateTimeString()}}
+                                <h3>{{$post->title}}</h3>
+                                <a href="{{url('/blog/posts/'.$post->id.'/show')}}">
+                                    <span><i class="fa fa-th-large"></i></span>
+                                    أقرا المزيد
+                                </a>
+                            </div>
                         </div>
+                    @endforeach
+                @else
+                    <div class="col-12 text-center">
+                        <h3>لم نقم بإضافة مقالات حتي الان</h3>
                     </div>
-                @endforeach
+                @endif
 
             </div>
+
         </div>
     </section>
 

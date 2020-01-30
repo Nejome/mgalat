@@ -168,6 +168,12 @@ class ProviderController extends Controller
 
     }
 
+    public function show(Provider $provider) {
+
+        return view('admin.providers.show', compact(['provider']));
+
+    }
+
     public function update(Request $request, Provider $provider) {
 
         $this->validate($request, [

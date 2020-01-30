@@ -99,6 +99,10 @@
                         </table>
                     </div>
 
+                    <div class="card-footer">
+                        {{$departments->links()}}
+                    </div>
+
                 </div>
             </div>
         </div>

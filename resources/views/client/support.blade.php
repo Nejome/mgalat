@@ -13,7 +13,8 @@
                         <a href="{{$setting->android_link}}">
                             <img src="{{asset('client/images/google_play.png')}}" width="128" height="40">
                         </a>
-                        <a href="{{$setting->ios_link}}">
+                        <a class="d-inline-block mt-1 mt-xyatech
+                        l-0" href="{{$setting->ios_link}}">
                             <img src="{{asset('client/images/apple_store.png')}}" width="128" height="40">
                         </a>
                     </div>
@@ -38,8 +39,13 @@
                         {{csrf_field()}}
 
                         <div class="form-group col-md-4 mb-3">
-                            <input name="subject" type="text" value="{{old('subject')}}" class="form-control" placeholder="الموضوع" required>
-                            <p class="text-danger">{{$errors->first('subject')}}</p>
+                            <input name="name" type="text" value="{{old('name')}}" class="form-control" placeholder="الاسم بالكامل" required>
+                            <p class="text-danger">{{$errors->first('name')}}</p>
+                        </div>
+
+                        <div class="form-group col-md-4 mb-3">
+                            <input name="email" type="email" value="{{old('email')}}" class="form-control" placeholder="البريد الالكتروني" required>
+                            <p class="text-danger">{{$errors->first('email')}}</p>
                         </div>
 
                         <div class="form-group col-md-4 mb-3">
@@ -47,9 +53,9 @@
                             <p class="text-danger">{{$errors->first('phone')}}</p>
                         </div>
 
-                        <div class="form-group col-md-4 mb-3">
-                            <input name="name" type="text" value="{{old('name')}}" class="form-control" placeholder="الاسم بالكامل" required>
-                            <p class="text-danger">{{$errors->first('name')}}</p>
+                        <div class="form-group col-md-12 mb-3">
+                            <input name="subject" type="text" value="{{old('subject')}}" class="form-control" placeholder="الموضوع" required>
+                            <p class="text-danger">{{$errors->first('subject')}}</p>
                         </div>
 
                         <div class="form-group col-12">

@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Provider extends Model
+class Provider extends Authenticatable
 {
+
+    use HasApiTokens;
 
     public static function boot() {
         parent::boot();

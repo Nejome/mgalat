@@ -16,7 +16,7 @@
 
             <li class="nav-item dropdown">
 
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #2dce89 !important;">
+                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #2386c9 !important;">
                     <i class="fas fa-user-tie fa-2x"></i>
                 </a>
 

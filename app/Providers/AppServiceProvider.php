@@ -9,6 +9,7 @@ use App\Provider;
 use App\Country;
 use App\Setting;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        Schema::defaultStringLength(191);
 
         view()->share('setting', Setting::find(1));
         view()->share('g_countries', Country::all());

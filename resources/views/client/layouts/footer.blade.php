@@ -185,7 +185,7 @@
         <div class="border_line"></div>
         <div class="row footer-bottom d-flex justify-content-between align-items-center">
             <p class="col-12 footer-text m-0 text-center">
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved {{--| Powered by <a href="http://nejome.com/" target="_blank">Alnejome</a>--}}
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Powered by <a href="http://nejome.com/" target="_blank">Alnejome</a>
             </p>
         </div>
     </div>

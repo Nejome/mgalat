@@ -22,6 +22,7 @@ class SupportController extends Controller
         $this->validate($request, [
            'subject' => 'required',
             'phone' => 'required|numeric',
+            'email' => 'required|email',
             'name' => 'required',
             'description' => 'required'
         ]);
@@ -29,6 +30,7 @@ class SupportController extends Controller
         $support = new Support;
         $support->subject = $request->subject;
         $support->phone = $request->phone;
+        $support->email = $request->email;
         $support->name = $request->name;
         $support->description = $request->description;
         $support->save();

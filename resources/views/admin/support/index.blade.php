@@ -32,6 +32,7 @@
                             <tr class="text-center">
                                 <th scope="col">الاسم</th>
                                 <th scope="col">الموضوع</th>
+                                <th scope="col">البريد الالكتروني</th>
                                 <th scope="col">رقم الهاتف</th>
                                 <th scope="col">التاريخ</th>
                                 <th scope="col"></th>
@@ -46,6 +47,8 @@
                                     <td>{{$row->name}}</td>
 
                                     <td>{{$row->subject}}</td>
+
+                                    <td>{{$row->email}}</td>
 
                                     <td>{{$row->phone}}</td>
 
