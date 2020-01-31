@@ -51,7 +51,6 @@ class ProviderImageController extends Controller
 
         }
 
-
     }
 
     public function delete_image(ProviderImage $image) {

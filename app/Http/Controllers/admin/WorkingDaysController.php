@@ -37,10 +37,6 @@ class WorkingDaysController extends Controller
         $days['friday']  = ['from' => $request->friday_from != ''? $request->friday_from : '-', 'to' => $request->friday_to != null? $request->friday_to : '-'];
 
         $week = $provider->workingDays;
-        if(!$week){
-            $week = new WorkingDayes;
-            $week->provider_id = $provider->id;
-        }
 
         $week->saturday = json_encode($days['saturday']);
         $week->sunday = json_encode($days['sunday']);

@@ -109,39 +109,92 @@ class ProviderController extends Controller
 
     }
 
-    public function update(Request $request, Provider $provider) {
+    public function update(Request $request, $provider) {
 
-        $this->validate($request, [
-            'name' => 'required',
-            'phone' => 'required|numeric',
-            'country_id' => 'required',
-            'specialty_id' => 'required',
-            'image' => 'image'
-        ]);
+        $provider = Provider::find($provider);
 
-        if($provider->phone != $request->phone){
-            $this->validate($request, ['phone' => 'unique:providers']);
-        }
+        if($provider) {
 
-        if(isset($request->image) && $request->image != ''){
-            $new_image = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('uploads/providers/'), $new_image);
-            if(file_exists(public_path('uploads/providers/'.$provider->image))){
-                unlink(public_path('uploads/providers/'.$provider->image));
+            $this->validate($request, [
+                'name' => 'required',
+                'phone' => 'required|numeric',
+                'country_id' => 'required',
+                'specialty_id' => 'required',
+                'image' => 'image'
+            ]);
+
+            if($provider->phone != $request->phone){
+                $this->validate($request, ['phone' => 'unique:providers']);
             }
-            $provider->image = $new_image;
+
+            if(isset($request->image) && $request->image != ''){
+                $new_image = time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('uploads/providers/'), $new_image);
+                if(file_exists(public_path('uploads/providers/'.$provider->image))){
+                    unlink(public_path('uploads/providers/'.$provider->image));
+                }
+                $provider->image = $new_image;
+            }
+
+            $provider->name = $request->name;
+            $provider->phone = $request->phone;
+            $provider->country_id = $request->country_id;
+            $provider->specialty_id = $request->specialty_id;
+            $provider->description = $request->description;
+            $provider->save();
+
+            $data['provider'] = new ProviderResources($provider);
+
+            return response()->json(['message' => trans('provider_api.updated'), 'data' => $data, 'status' => 1]);
+
+        } else {
+
+            return response()->json(['message' => trans('provider_api.providerNotExist'), 'status' => 0]);
+
         }
 
-        $provider->name = $request->name;
-        $provider->phone = $request->phone;
-        $provider->country_id = $request->country_id;
-        $provider->specialty_id = $request->specialty_id;
-        $provider->description = $request->description;
-        $provider->save();
+    }
 
-        $data['provider'] = new ProviderResources($provider);
+    public function updateContact(Request $request, $provider) {
 
-        return response()->json(['message' => trans('provider_api.updated'), 'data' => $data, 'status' => 1]);
+        $provider = Provider::find($provider);
+
+        if($provider) {
+
+            $provider->email = $request->email;
+            $provider->facebook = $request->facebook;
+            $provider->twitter = $request->twitter;
+            $provider->instagram = $request->instagram;
+            $provider->whatsapp = $request->whatsapp;
+            $provider->snapchat = $request->snapchat;
+            $provider->website = $request->website;
+            $provider->save();
+
+            $data['provider'] = new ProviderResources($provider);
+
+            return response()->json(['message' => trans('provider_api.contactUpdated'), 'data' => $data, 'status' => 1]);
+
+        }else  {
+
+            return response()->json(['message' => trans('provider_api.providerNotExist'), 'status' => 0]);
+
+        }
+
+    }
+
+    public function ProviderProfile($provider) {
+
+        $provider = Provider::find($provider);
+
+        if($provider) {
+
+            return new ProviderResources($provider);
+
+        }else {
+
+            return response()->json(['message' => trans('provider_api.providerNotExist'), 'status' => 0]);
+
+        }
 
     }
 
