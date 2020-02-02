@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function() {
         Route::post('settings/updateApplication', 'admin\SettingController@updateApplication');
         Route::post('settings/applicationImage/store', 'admin\ApplicationImageController@store');
         Route::get('settings/applicationImage/{image}/delete', 'admin\ApplicationImageController@delete');
+        Route::get('settings/applicationRates', 'admin\ApplicationRateController@index');
+        Route::get('settings/applicationRates/{rate}/delete', 'admin\ApplicationRateController@delete');
 
         //**********Providers Routes**********//
         Route::get('/providers/create', 'admin\ProviderController@create');
@@ -140,6 +142,12 @@ Route::middleware('auth')->group(function() {
         Route::get('support', 'admin\SupportController@index');
         Route::get('support/{support}/show', 'admin\SupportController@show');
         Route::get('support/{support}/delete', 'admin\SupportController@delete');
+
+        Route::get('messages', function () {
+
+            return view('admin.support.messages');
+
+        });
 
     });
 

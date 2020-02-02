@@ -11,21 +11,27 @@
 
     <link href="{{asset('cp/assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
     <link href="{{asset('cp/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+    <link type="text/css" href="{{asset('cp/assets/css/chat.css')}}" rel="stylesheet">
     <link type="text/css" href="{{asset('cp/assets/css/argon.css?v=1.0.0')}}" rel="stylesheet">
 
 </head>
 <body>
 
-@include('admin.layout.sidebar')
+<div id="cpApp">
 
-<div class="main-content">
+    @include('admin.layout.sidebar')
 
-    @include('admin.layout.header')
+    <div class="main-content">
 
-    @yield('content')
+        @include('admin.layout.header')
+
+        @yield('content')
+
+    </div>
 
 </div>
 
+<script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('cp/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('cp/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('cp/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>

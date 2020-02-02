@@ -194,6 +194,8 @@ class ProviderDataController extends Controller
 
     public function updateLocation(Request $request, $provider) {
 
+        return auth()->user();
+
         $provider = Provider::find($provider);
 
         if($provider) {
@@ -289,6 +291,25 @@ class ProviderDataController extends Controller
             $data['rate'] = new ProviderRatingResource($rate);
 
             return response()->json(['message' => trans('provider_api.rated'), 'data' => $data, 'status' => 1]);
+
+        }else {
+
+            return response()->json(['message' => trans('provider_api.providerNotExist'), 'status' => 0]);
+
+        }
+
+    }
+
+    public function addView($provider) {
+
+        $provider = Provider::find($provider);
+
+        if($provider) {
+
+            $provider->views += 1;
+            $provider->save();
+
+            return response()->json(['message' => trans('provider_api.viewAdded'), 'status' => 1]);
 
         }else {
 

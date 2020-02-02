@@ -77,13 +77,13 @@ class ProviderController extends Controller
 
         $current = 'departments';
 
-        $close_providers = DB::select(DB::raw('SELECT id, ( 3959 * acos( cos( radians(' . $request->lat . ') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(' . $request->lng . ') ) + sin( radians(' . $request->lat .') ) * sin( radians(lat) ) ) ) AS distance FROM provider_locations HAVING distance < ' . 51 . ' ORDER BY distance') );
+        $close_providers = DB::select(DB::raw('SELECT id, provider_id, ( 3959 * acos( cos( radians(' . $request->lat . ') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(' . $request->lng . ') ) + sin( radians(' . $request->lat .') ) * sin( radians(lat) ) ) ) AS distance FROM provider_locations HAVING distance < ' . 51 . ' ORDER BY distance') );
         $close_providers_id = [];
         foreach ($close_providers as $row){
-            $close_providers_id[] = $row->id;
+            $close_providers_id[] = $row->provider_id;
         }
 
-        $specialties = Specialty::where('title->ar','LIKE','%'.$request->text.'%')->get();
+        $specialties = Specialty::where('title->'.app()->getLocale(),'LIKE','%'.$request->text.'%')->get();
         $specialties_id = [];
         foreach ($specialties as $row){
             $specialties_id[] = $row->id;

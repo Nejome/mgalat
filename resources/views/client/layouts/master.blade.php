@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('client/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('client/slider/slider.css')}}">
+    <link rel="stylesheet" href="{{asset('client/css/chart.css')}}">
     <link rel="stylesheet" href="{{asset('client/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('client/css/responsive.css')}}">
 

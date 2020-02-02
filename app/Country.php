@@ -12,4 +12,10 @@ class Country extends Model
 
     public $translatable = ['title'];
 
+    public function providers() {
+
+        return $this->hasMany('App\Provider');
+
+    }
+
 }

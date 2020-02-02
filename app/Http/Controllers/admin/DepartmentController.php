@@ -98,7 +98,7 @@ class DepartmentController extends Controller
 
         if($department->specialty->count() != 0) {
 
-            return back()->with('delete_error', 'عفوا يحتوي هذا القسم علي تخصصات تنتمي اليه، لذلك لا يمكنك حذفه');
+            return back()->with('delete_error', 'عفوا يحتوي هذا القسم علي تخصصات، لذلك لا يمكنك حذفه');
 
         }
 

@@ -73,7 +73,7 @@ class Provider extends Authenticatable
         if($rating->count() == 0){
             return 0;
         }else {
-         return $total/$rating->count();
+         return round($total/$rating->count());
         }
     }
 

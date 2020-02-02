@@ -67,11 +67,21 @@ class SpecialtyController extends Controller
 
     public function delete(Specialty $specialty){
 
-        $specialty->delete();
+        if($specialty->providers->count()) {
 
-        session()->flash('deleted', 'تم حذف التخصص بنجاح');
+            session()->flash('delete_error', 'ينتمي الي هذا التخصص مزودي خدمات لذلك لا يمكنك حذفه');
 
-        return redirect(url('/admin/specialties'));
+            return redirect(url('/admin/specialties'));
+
+        }else {
+
+            $specialty->delete();
+
+            session()->flash('deleted', 'تم حذف التخصص بنجاح');
+
+            return redirect(url('/admin/specialties'));
+
+        }
 
     }
 

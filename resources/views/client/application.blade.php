@@ -16,18 +16,6 @@
         </div>
     </section>
 
-    {{--<section class="brief-section">
-        <div class="container">
-            <h2 class="application-title phone-under-line text-center mb-5">نبذه عن التطبيق</h2>
-            <div class="brief-image-container mb-4">
-                <img src="{{asset('client/images/application-brief.png')}}">
-            </div>
-            <p class="text-right" style="font-size: 16px;font-weight: 600;">
-                تماشياً مع التطور التكنولوجي سمة هذا العصر تقدم شركتنا مجالات تطبيق الهاتف الجوال للإصدارين IOS و Android الذي يتمتع  بالوضوح وسهولة الاستخدام وسرعة ملئ البيانات بما في ذلك اختيار الخدمة وعنوان تنفيذها وتحديد بعض التفاصيل المتعلقة ببيانات بالخدمة ثم الحجز والاتفاق علي تنفيذ الخدمة في المواعيد التي يمكنك اختيارها كما انه يتميز بسرعة الوصول للعميل بإعتماد نظام ال GPS . يكفيك للحصول علي الخدمة الأفضل تحميل التطبيق والتواصل معنا عبر التطبيق ودع البقية علينا.
-            </p>
-        </div>
-    </section>--}}
-
     <section class="steps-area mb-5">
         <div class="container">
             <h1>كيفية الاستخدام</h1>
@@ -223,10 +211,57 @@
 
     <section class="mb-5">
         <div class="container">
-            <h2 class="application-title phone-under-line text-center mb-5">تقييم التطبيق</h2>
-            <div class="brief-image-container mb-4">
-                <img src="{{asset('client/images/evaluation.png')}}">
+
+            <h2 class="application-title phone-under-line text-center">تقييم التطبيق</h2>
+
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="c100 p{{$securityTotal}} blue">
+                        <span>{{$securityTotal}}%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <h2 class="text-center">الامان</h2>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="c100 p{{$effectivenessTotal}} pink">
+                        <span>{{$effectivenessTotal}}%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <h2 class="text-center">الفاعلية</h2>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="c100 p{{$technicalSupportTotal}} green">
+                        <span>{{$technicalSupportTotal}}%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <h2 class="text-center">الدعم الفني</h2>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="c100 p{{$responsivenessTotal}} orange">
+                        <span>{{$responsivenessTotal}}%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <h2 class="text-center">سرعة الاستجابة</h2>
+                </div>
+
             </div>
+
         </div>
     </section>
 

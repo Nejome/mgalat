@@ -77,15 +77,26 @@ class CountryController extends Controller
 
     public function delete(Country $country){
 
-        if(file_exists(public_path('uploads/countries/'.$country->flag))){
-            unlink(public_path('uploads/countries/'.$country->flag));
+        if($country->providers->count()){
+
+            session()->flash('cannotDelete', 'عفوا ينتمي الي هذه الدولة عدد من مزودي الخدمة لذلك لا يمكنك حذفها');
+
+            return redirect(url('/admin/countries'));
+
+
+        }else {
+
+            if(file_exists(public_path('uploads/countries/'.$country->flag))){
+                unlink(public_path('uploads/countries/'.$country->flag));
+            }
+
+            $country->delete();
+
+            session()->flash('deleted', 'تم حذف الدولة بنجاح');
+
+            return redirect(url('/admin/countries'));
+
         }
-
-        $country->delete();
-
-        session()->flash('deleted', 'تم حذف الدولة بنجاح');
-
-        return redirect(url('/admin/countries'));
 
     }
 

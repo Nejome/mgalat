@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 
+use App\ApplicationRate;
 use App\Http\Controllers\Controller;
 use App\Provider;
 use Illuminate\Http\Request;
@@ -26,7 +27,12 @@ class HomeController extends Controller
 
         $images = ApplicationImage::all();
 
-        return view('client.application', compact(['current', 'images']));
+        $securityTotal = ApplicationRate::securityTotal();
+        $effectivenessTotal = ApplicationRate::effectivenessTotal();
+        $technicalSupportTotal = ApplicationRate::technicalSupportTotal();
+        $responsivenessTotal = ApplicationRate::responsivenessTotal();
+
+        return view('client.application', compact(['current', 'images', 'securityTotal', 'effectivenessTotal', 'technicalSupportTotal', 'responsivenessTotal']));
 
     }
 

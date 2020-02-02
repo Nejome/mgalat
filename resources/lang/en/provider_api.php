@@ -23,5 +23,6 @@ return [
     'noLocation' => 'The provider location has not been set yet',
     'locationUpdated' => 'Your location has been updated successfully',
     'rated' => 'Your rate added successfully',
+    'viewAdded' => 'Provider views increased successfully',
 
 ];

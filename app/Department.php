@@ -18,4 +18,18 @@ class Department extends Model
 
     }
 
+    public function providersCount() {
+
+        $count = 0;
+
+        foreach ($this->specialty as $row) {
+
+            $count += $row->providers->count();
+
+        }
+
+        return $count;
+
+    }
+
 }

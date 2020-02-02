@@ -1,4 +1,16 @@
-<h3>التطبيق</h3>
+<div class="row align-items-center mb-3">
+
+    <div class="col">
+
+        <h2 class="mb-0">التطبيق</h2>
+
+    </div>
+    <div class="col-4 text-left">
+
+        <a href="{{url('admin/settings/applicationRates')}}" class="btn btn-sm btn-primary">تقييامات التطبيق</a>
+
+    </div>
+</div>
 
 <div class="card shadow">
 

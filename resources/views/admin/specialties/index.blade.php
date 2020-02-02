@@ -102,6 +102,15 @@
                             </div>
                         @endif
 
+                        @if(session()->has('delete_error'))
+                            <div class="alert alert-primary alert-dismissible fade show mt-2" role="alert">
+                                <span class="alert-inner--text">{{session()->get('delete_error')}}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        @endif
+
                         @if(session()->has('deleted'))
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <span class="alert-inner--text">{{session()->get('deleted')}}</span>
