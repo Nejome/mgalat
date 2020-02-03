@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Provider;
 use Illuminate\Http\Request;
 use App\Message;
-use App\Http\Resources\Message as MessageResource;
 use App\Http\Resources\Provider as ProviderResource;
 
 class MessageController extends Controller
@@ -31,7 +30,7 @@ class MessageController extends Controller
             })
             ->get();
 
-        return MessageResource::collection($messages);
+        return $messages;
 
     }
 
@@ -45,9 +44,7 @@ class MessageController extends Controller
 
         broadcast(new MessageSent($message))->toOthers();
 
-        $data['message'] = $message;
-
-        return response(['data'=>$data, 'status'=> 1]);
+        return response(['message'=>$message, 'status'=> 1]);
 
     }
 

@@ -80,7 +80,6 @@ img{
 
 .inbox_chat {
     direction: ltr;
-    height: 597px;
     overflow: auto;
 }
 
@@ -140,7 +139,7 @@ img{
     float: right;
     width: 100%;
 }
-.input_msg_write input {
+.input_msg_write textarea {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
     color: #4c4c4c;
@@ -171,6 +170,6 @@ img{
 }
 
 .msg_history {
-    height: 516px;
-    overflow-y: auto;
+    height: 400px;
+    overflow-y: scroll;
 }

@@ -3,39 +3,35 @@
 
         <div class="row">
 
-            <div class="col-md-5 pl-0">
+            <div class="col-md-5 pl-0 pr-0 inbox_people">
 
-                <div class="inbox_people">
+                <div class="inbox_chat">
 
-                    <div class="inbox_chat">
+                    <h3 v-if="providers.length == 0" class="text-center mt-5">لا توجد محادثات حتي الان</h3>
 
-                        <h3 v-if="providers.length == 0" class="text-center mt-5">لا توجد محادثات حتي الان</h3>
-
-                        <div v-for="provider in providers"
-                             :key="provider.id"
-                             :class="['chat_list', activeProvider.id === provider.id? 'active_chat': '']"
-                             @click="setActive(provider)"
-                        >
-                            <div class="chat_people">
-                                <div class="chat_img">
-                                    <img :src="provider.image">
-                                </div>
-                                <div class="chat_ib">
-                                    <h5>{{provider.name}}</h5>
-                                </div>
+                    <div v-for="provider in providers"
+                         :key="provider.id"
+                         :class="['chat_list', activeProvider.id === provider.id? 'active_chat': '']"
+                         @click="setActive(provider)"
+                    >
+                        <div class="chat_people">
+                            <div class="chat_img">
+                                <img :src="provider.image">
+                            </div>
+                            <div class="chat_ib">
+                                <h5>{{provider.name}}</h5>
                             </div>
                         </div>
-
                     </div>
-                </div>
 
+                </div>
             </div>
 
             <div class="col-md-7 pr-0">
 
                 <div class="mesgs">
 
-                    <div class="msg_history">
+                    <div id="messagesList" class="msg_history">
 
                         <div v-for="(message, index) in allMessages" :class="[message.sender_id === 0? 'outgoing_msg': 'incoming_msg']">
 
@@ -59,13 +55,13 @@
 
                     </div>
 
-                    <div class="type_msg">
+                    <div class="type_msg pt-3">
                         <div class="input_msg_write">
                             <div class="row">
                                 <div class="col-1 pt-2">
                                     <button class="msg_send_btn" type="button" @click="sendMessage()"><i class="fa fa-paper-plane"></i></button>
                                 </div>
-                                <input type="text" v-model="message" class="col-11 write_msg" placeholder="اكتب رسالتك" />
+                                <textarea v-model="message" @keypress.enter="sendMessage" class="col-11 write_msg" rows="5" placeholder="اكتب رسالتك" ></textarea>
                             </div>
                         </div>
                     </div>
@@ -77,6 +73,7 @@
         </div>
 
     </div>
+
 </template>
 
 <script>
@@ -100,14 +97,21 @@
 
             this.getProviders();
 
-            Echo.private('chat.0')
-                .listen('MessageSent',(e)=>{
+            Echo.private(`chat.0`)
 
-                    console.log('message sent')
+                .listen('MessageSent', (e) => {
 
-                    //this.activeFriend=e.message.user_id;
-                    //this.allMessages.push(e.message)
+                    this.allMessages.push(e.message);
+
+                    this.getProviders();
+
                 });
+
+        },
+
+        updated() {
+
+            this.messageListScroll();
 
         },
 
@@ -120,6 +124,12 @@
         },
 
         methods: {
+
+            messageListScroll() {
+                var container = document.querySelector("#messagesList");
+                var scrollHeight = container.scrollHeight;
+                container.scrollTop = scrollHeight;
+            },
 
             getProviders() {
 
@@ -149,7 +159,7 @@
 
                 axios.get('/api/messages/'+this.activeProvider.id+'/getMessages').then(response => {
 
-                    this.allMessages = response.data.data;
+                    this.allMessages = response.data;
 
                 });
 
@@ -165,13 +175,14 @@
                     return alert('عفوا قم بتحديد مزود خدمة اولا');
                 }
 
-                axios.post('/api/providers/messages/sendMessage', {
+                axios.post('/admin/messages/sendMessage', {
                     sender_id: 0,
                     receiver_id: this.activeProvider.id,
                     message: this.message
                 }).then(response => {
                     this.message = null;
-                    this.allMessages.push(response.data.data.message)
+                    this.messageListScroll();
+                    this.allMessages.push(response.data.message);
                 });
             }
 

@@ -1986,9 +1986,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Chat",
   data: function data() {
@@ -2000,11 +1997,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    var _this = this;
+
     this.getProviders();
-    Echo["private"]('chat.0').listen('MessageSent', function (e) {
-      console.log('message sent'); //this.activeFriend=e.message.user_id;
-      //this.allMessages.push(e.message)
+    Echo["private"]("chat.0").listen('MessageSent', function (e) {
+      _this.allMessages.push(e.message);
+
+      _this.getProviders();
     });
+  },
+  updated: function updated() {
+    this.messageListScroll();
   },
   watch: {
     activeProvider: function activeProvider(val) {
@@ -2012,14 +2015,19 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    messageListScroll: function messageListScroll() {
+      var container = document.querySelector("#messagesList");
+      var scrollHeight = container.scrollHeight;
+      container.scrollTop = scrollHeight;
+    },
     getProviders: function getProviders() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/messages/getProviders').then(function (response) {
-        _this.providers = response.data.data;
+        _this2.providers = response.data.data;
 
-        if (_this.providers.length > 0) {
-          _this.activeProvider = _this.providers[0];
+        if (_this2.providers.length > 0) {
+          _this2.activeProvider = _this2.providers[0];
         }
       });
     },
@@ -2027,18 +2035,18 @@ __webpack_require__.r(__webpack_exports__);
       this.activeProvider = provider;
     },
     getMessages: function getMessages() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.activeProvider) {
         return alert('عفوا قم بإختيار مزود خدمة');
       }
 
       axios.get('/api/messages/' + this.activeProvider.id + '/getMessages').then(function (response) {
-        _this2.allMessages = response.data.data;
+        _this3.allMessages = response.data;
       });
     },
     sendMessage: function sendMessage() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (!this.message) {
         return alert('عفوا قم بإدخال الرسالة');
@@ -2048,14 +2056,16 @@ __webpack_require__.r(__webpack_exports__);
         return alert('عفوا قم بتحديد مزود خدمة اولا');
       }
 
-      axios.post('/api/providers/messages/sendMessage', {
+      axios.post('/admin/messages/sendMessage', {
         sender_id: 0,
         receiver_id: this.activeProvider.id,
         message: this.message
       }).then(function (response) {
-        _this3.message = null;
+        _this4.message = null;
 
-        _this3.allMessages.push(response.data.data.message);
+        _this4.messageListScroll();
+
+        _this4.allMessages.push(response.data.message);
       });
     }
   }
@@ -29526,57 +29536,55 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "messaging" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-5 pl-0" }, [
-        _c("div", { staticClass: "inbox_people" }, [
-          _c(
-            "div",
-            { staticClass: "inbox_chat" },
-            [
-              _vm.providers.length == 0
-                ? _c("h3", { staticClass: "text-center mt-5" }, [
-                    _vm._v("لا توجد محادثات حتي الان")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.providers, function(provider) {
-                return _c(
-                  "div",
-                  {
-                    key: provider.id,
-                    class: [
-                      "chat_list",
-                      _vm.activeProvider.id === provider.id ? "active_chat" : ""
-                    ],
-                    on: {
-                      click: function($event) {
-                        return _vm.setActive(provider)
-                      }
+      _c("div", { staticClass: "col-md-5 pl-0 pr-0 inbox_people" }, [
+        _c(
+          "div",
+          { staticClass: "inbox_chat" },
+          [
+            _vm.providers.length == 0
+              ? _c("h3", { staticClass: "text-center mt-5" }, [
+                  _vm._v("لا توجد محادثات حتي الان")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.providers, function(provider) {
+              return _c(
+                "div",
+                {
+                  key: provider.id,
+                  class: [
+                    "chat_list",
+                    _vm.activeProvider.id === provider.id ? "active_chat" : ""
+                  ],
+                  on: {
+                    click: function($event) {
+                      return _vm.setActive(provider)
                     }
-                  },
-                  [
-                    _c("div", { staticClass: "chat_people" }, [
-                      _c("div", { staticClass: "chat_img" }, [
-                        _c("img", { attrs: { src: provider.image } })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "chat_ib" }, [
-                        _c("h5", [_vm._v(_vm._s(provider.name))])
-                      ])
+                  }
+                },
+                [
+                  _c("div", { staticClass: "chat_people" }, [
+                    _c("div", { staticClass: "chat_img" }, [
+                      _c("img", { attrs: { src: provider.image } })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chat_ib" }, [
+                      _c("h5", [_vm._v(_vm._s(provider.name))])
                     ])
-                  ]
-                )
-              })
-            ],
-            2
-          )
-        ])
+                  ])
+                ]
+              )
+            })
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-7 pr-0" }, [
         _c("div", { staticClass: "mesgs" }, [
           _c(
             "div",
-            { staticClass: "msg_history" },
+            { staticClass: "msg_history", attrs: { id: "messagesList" } },
             _vm._l(_vm.allMessages, function(message, index) {
               return _c(
                 "div",
@@ -29619,7 +29627,7 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "type_msg" }, [
+          _c("div", { staticClass: "type_msg pt-3" }, [
             _c("div", { staticClass: "input_msg_write" }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-1 pt-2" }, [
@@ -29638,7 +29646,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("input", {
+                _c("textarea", {
                   directives: [
                     {
                       name: "model",
@@ -29648,9 +29656,18 @@ var render = function() {
                     }
                   ],
                   staticClass: "col-11 write_msg",
-                  attrs: { type: "text", placeholder: "اكتب رسالتك" },
+                  attrs: { rows: "5", placeholder: "اكتب رسالتك" },
                   domProps: { value: _vm.message },
                   on: {
+                    keypress: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.sendMessage($event)
+                    },
                     input: function($event) {
                       if ($event.target.composing) {
                         return
@@ -41868,7 +41885,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "mgalat_app_key",
   wsHost: window.location.hostname,
-  wsPort: 6002,
+  wsPort: 6001,
   disableStats: true
 });
 

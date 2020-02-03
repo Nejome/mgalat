@@ -1,7 +1,6 @@
 <?php
 
-
-Broadcast::channel('chat.{receiver_id}', function ($user) {
+Broadcast::channel('chat.{receiver_id}', function () {
 
     return auth()->check();
 

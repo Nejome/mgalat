@@ -149,6 +149,8 @@ Route::middleware('auth')->group(function() {
 
         });
 
+        Route::post('messages/sendMessage', 'admin\MessageController@sendMessage');
+
     });
 
 });
