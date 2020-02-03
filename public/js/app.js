@@ -2023,10 +2023,10 @@ __webpack_require__.r(__webpack_exports__);
     getProviders: function getProviders() {
       var _this2 = this;
 
-      axios.get('/api/messages/getProviders').then(function (response) {
+      axios.get('/admin/messages/getProviders').then(function (response) {
         _this2.providers = response.data.data;
 
-        if (_this2.providers.length > 0) {
+        if (_this2.activeProvider == null) {
           _this2.activeProvider = _this2.providers[0];
         }
       });

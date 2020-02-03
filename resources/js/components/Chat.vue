@@ -133,11 +133,11 @@
 
             getProviders() {
 
-                axios.get('/api/messages/getProviders').then(response => {
+                axios.get('/admin/messages/getProviders').then(response => {
 
                     this.providers = response.data.data;
 
-                    if(this.providers.length > 0){
+                    if(this.activeProvider == null){
                         this.activeProvider = this.providers[0];
                     }
 

@@ -12,6 +12,12 @@ use App\Http\Resources\Provider as ProviderResource;
 class MessageController extends Controller
 {
 
+    public function index() {
+
+        return view('admin.support.messages');
+
+    }
+
     public function getProviders() {
 
         $providers_id = Message::where('sender_id', '!=', 0)->get('sender_id');

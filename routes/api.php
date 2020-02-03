@@ -68,8 +68,6 @@ Route::post('rateApplication', 'api\GeneralDataController@rateApplication');
 
 Route::get('getApplicationRateTotal', 'api\GeneralDataController@getApplicationRateTotal');
 
-/* Special Routes */
-
 Route::get('messages/{provider}/getMessages', 'admin\MessageController@getMessages');
 
-Route::get('messages/getProviders', 'admin\MessageController@getProviders');
+
