@@ -41883,10 +41883,9 @@ var token = document.head.querySelector('meta[name="csrf-token"]');
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "mgalat_app_key",
-  wsHost: window.location.hostname,
-  wsPort: 6001,
-  disableStats: true
+  key: 'a18cfce9960a429e5d85',
+  cluster: 'ap1',
+  forceTLS: true
 });
 
 /***/ }),
