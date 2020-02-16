@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\ProviderLocation;
 use Illuminate\Http\Request;
 use App\Provider;
 use App\ProviderRating;
@@ -78,6 +79,7 @@ class ProviderController extends Controller
         $current = 'departments';
 
         $close_providers = DB::select(DB::raw('SELECT id, provider_id, ( 3959 * acos( cos( radians(' . $request->lat . ') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(' . $request->lng . ') ) + sin( radians(' . $request->lat .') ) * sin( radians(lat) ) ) ) AS distance FROM provider_locations HAVING distance < ' . 51 . ' ORDER BY distance') );
+
         $close_providers_id = [];
         foreach ($close_providers as $row){
             $close_providers_id[] = $row->provider_id;

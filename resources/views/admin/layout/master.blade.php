@@ -38,7 +38,8 @@
 <script src="{{asset('cp/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 <script src="{{asset('cp/assets/js/argon.js?v=1.0.0')}}"></script>
 <script src="{{asset('cp/ckeditor/ckeditor.js')}}"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKUtiN-bHruEDPRjKN_-qjq1Kg8WAOjUI"></script>
+<script src="{{asset('cp/assets/js/providerLocation.js')}}"></script>
 
 <script>
 
