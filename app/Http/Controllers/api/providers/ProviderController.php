@@ -63,7 +63,7 @@ class ProviderController extends Controller
 
             }else {
 
-                return response()->json(['message' => __('provider_api.user_not_registered'), 'data' => ['phone' => $code->phone], 'status' => 0]);
+                return response()->json(['message' => __('provider_api.user_not_registered'), 'data' => ['phone' => $code->phone], 'status' => 2]);
 
             }
 

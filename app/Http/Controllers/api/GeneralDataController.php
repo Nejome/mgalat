@@ -54,6 +54,22 @@ class GeneralDataController extends Controller
 
     }
 
+    public function departmentProviders($department) {
+
+        $department = Department::find($department);
+
+        if($department) {
+
+            return $department->providers();
+
+        }else {
+
+            return response()->json(['message' => trans('general_api.departmentNotExist'), 'status' => 0]);
+
+        }
+
+    }
+
     public function getSpecialties() {
 
         return SpecialtyResource::collection(Specialty::all());
@@ -75,6 +91,7 @@ class GeneralDataController extends Controller
         }
 
     }
+
 
     public function search(Request $request) {
 
@@ -130,6 +147,55 @@ class GeneralDataController extends Controller
         }else {
 
             return response()->json(['message' => trans('general_api.noSearchResult'), 'status' => 0]);
+
+        }
+
+    }
+
+    public function getNearestProviders(Request $request) {
+
+        $message = [
+            'lat.required' => trans('general_api.searchLocationValidation'),
+            'lng.required' => trans('general_api.searchLocationValidation')
+        ];
+
+        $this->validate($request, [
+            'lat' => 'required',
+            'lng' => 'required'
+        ], $message);
+
+        $close_providers = DB::select(DB::raw('SELECT id, provider_id, ( 3959 * acos( cos( radians(' . $request->lat . ') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(' . $request->lng . ') ) + sin( radians(' . $request->lat .') ) * sin( radians(lat) ) ) ) AS distance FROM provider_locations HAVING distance < ' . 51 . ' ORDER BY distance') );
+        $close_providers_id = [];
+        foreach ($close_providers as $row){
+            $close_providers_id[] = $row->provider_id;
+        }
+
+        $special_providers_count = 0;
+        $normal_providers_count = 0;
+
+        $providers = Provider::whereIn('id', $close_providers_id)
+            ->OrderBy('is_special', 'desc')
+            ->get();
+
+        foreach($providers as $provider) {
+            if($provider->is_special == 1) {
+                $special_providers_count = $special_providers_count + 1;
+            }else {
+                $normal_providers_count = $normal_providers_count + 1;
+            }
+        }
+
+        $data['providers'] = ProviderResource::collection($providers);
+        $data['special_providers_count'] = $special_providers_count;
+        $data['normal_providers_count'] = $normal_providers_count;
+
+        if($providers->count()) {
+
+            return response()->json(['data' => $data, 'status' => 1]);
+
+        }else {
+
+            return response()->json(['message' => trans('general_api.noNearestProviders'), 'status' => 0]);
 
         }
 

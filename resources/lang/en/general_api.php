@@ -8,4 +8,5 @@ return [
     'searchTextValidation' => 'Sorry, enter the search text',
     'searchLocationValidation' => 'Sorry, select your location',
     'noSearchResult' => 'Sorry, no matching search results were found',
+    'noNearestProviders' => 'Sorry, there are no service providers near you at this time',
 ];

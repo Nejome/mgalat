@@ -58,11 +58,15 @@ Route::get('getDepartments', 'api\GeneralDataController@getDepartments');
 
 Route::get('departments/{department}/specialties', 'api\GeneralDataController@departmentSpecialties');
 
+Route::get('departments/{department}/providers', 'api\GeneralDataController@departmentProviders');
+
 Route::get('getSpecialties', 'api\GeneralDataController@getSpecialties');
 
 Route::get('specialties/{specialty}/providers', 'api\GeneralDataController@specialtyProviders');
 
 Route::post('search', 'api\GeneralDataController@search');
+
+Route::post('getNearestProviders', 'api\GeneralDataController@getNearestProviders');
 
 Route::post('rateApplication', 'api\GeneralDataController@rateApplication');
 
