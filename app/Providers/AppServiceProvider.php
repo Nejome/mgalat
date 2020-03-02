@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('g_specialties_count', Specialty::all()->count());
         view()->share('g_countries_count', Country::all()->count());
         view()->share('g_providers_count', Provider::all()->count());
+        view()->share('g_year', date('Y'));
 
     }
 }

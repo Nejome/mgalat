@@ -1,7 +1,6 @@
-<!doctype html>
-<html lang="en">
+@extends('app')
 
-<head>
+@push('headerTags')
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,11 +20,9 @@
 
     <img id="loading" src="{{asset('client/images/loading2.gif')}}">
 
-</head>
+@endpush
 
-<body>
-
-<div id="app">
+@section('master')
 
     @include('client.layouts.header')
 
@@ -33,28 +30,27 @@
 
     @include('client.layouts.footer')
 
-</div>
+@endsection
 
-<script src="{{asset('client/js/jquery-3.2.1.min.js')}}"></script>
-<script src="{{asset('client/js/popper.js')}}"></script>
-<script src="{{asset('client/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('client/js/custom.js')}}"></script>
-<script src="{{asset('client/slider/slider.js')}}"></script>
-<script src="{{asset('client/myJs/rating.js')}}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKUtiN-bHruEDPRjKN_-qjq1Kg8WAOjUI"></script>
-<script src="{{asset('client/myJs/providerLocation.js')}}"></script>
-<script src="{{asset('client/myJs/searchMap.js')}}"></script>
-<script src="{{asset('client/myJs/searchForm.js')}}"></script>
-<script src="{{asset('client/myJs/departmentMap.js')}}"></script>
+@push('footerTags')
 
-<script>
-    $(window).on('load', function(){
-        $("#app").fadeIn(1000);
-        $('#loading').hide();
-    });
-</script>
+    <script src="{{asset('client/js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{asset('client/js/popper.js')}}"></script>
+    <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('client/js/custom.js')}}"></script>
+    <script src="{{asset('client/slider/slider.js')}}"></script>
+    <script src="{{asset('client/myJs/rating.js')}}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKUtiN-bHruEDPRjKN_-qjq1Kg8WAOjUI"></script>
+    <script src="{{asset('client/myJs/providerLocation.js')}}"></script>
+    <script src="{{asset('client/myJs/searchMap.js')}}"></script>
+    <script src="{{asset('client/myJs/searchForm.js')}}"></script>
+    <script src="{{asset('client/myJs/departmentMap.js')}}"></script>
 
+    <script>
+        $(window).on('load', function(){
+            $("#app").fadeIn(1000);
+            $('#loading').hide();
+        });
+    </script>
 
-</body>
-
-</html>
+@endpush

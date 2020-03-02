@@ -13,7 +13,7 @@ class SupportController extends Controller
 
         $current = 'support';
 
-        return view('client.support', compact('current'));
+        return view('client.support.index', compact('current'));
 
     }
 
@@ -36,6 +36,26 @@ class SupportController extends Controller
         $support->save();
 
         return back()->with('created', 'تم ارسال استعلامك بنجاح');
+
+    }
+
+    public function startChat() {
+
+        $current = 'support';
+
+        return view('client.support.start-chat', compact('current'));
+
+    }
+
+
+    public function createRoom(Request $request) {
+
+
+    }
+
+    public function chat($token) {
+
+
 
     }
 
