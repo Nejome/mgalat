@@ -13,8 +13,7 @@
                         <a href="{{$setting->android_link}}">
                             <img src="{{asset('client/images/google_play.png')}}" width="128" height="40">
                         </a>
-                        <a class="d-inline-block mt-1 mt-xyatech
-                        l-0" href="{{$setting->ios_link}}">
+                        <a class="d-inline-block mt-1 mt-xyatechl-0" href="{{$setting->ios_link}}">
                             <img src="{{asset('client/images/apple_store.png')}}" width="128" height="40">
                         </a>
                     </div>
@@ -27,14 +26,10 @@
                 </div>
 
                 <div class="col-md-7 m-auto order-1 order-md-2 mb-sm-5 text-center">
-                    <h1>يسعدنا تواصلكم معنا</h1>
-                    <p>سنقوم بالرد علي كافة الأسئلة والاستماع الي الاقتراحات.. شكراً لتواصلكم معنا</p>
+                    <h1>يسعدنا تواصلكم معنا عبر الدردشة</h1>
+                    <p>قم بتعبئة النموذج ادناه لبدء الدردشة فوراً مع الادارة.. شكراً لتواصلكم معنا</p>
 
-                    @if(session()->has('created'))
-                        <div class="alert alert-success">{{session()->get('created')}}</div>
-                    @endif
-
-                    <form method="POST" action="{{url('/support/send')}}" class="row">
+                    <form method="POST" action="{{url('support/start-chat')}}" class="row">
 
                         {{csrf_field()}}
 
@@ -54,17 +49,17 @@
                         </div>
 
                         <div class="form-group col-md-12 mb-3">
-                            <input name="subject" type="text" value="{{old('subject')}}" class="form-control" placeholder="الموضوع" required>
-                            <p class="text-danger">{{$errors->first('subject')}}</p>
+                            <input name="title" type="text" value="{{old('title')}}" class="form-control" placeholder="العنوان" required>
+                            <p class="text-danger">{{$errors->first('title')}}</p>
                         </div>
 
                         <div class="form-group col-12">
-                            <textarea name="description" class="form-control" rows="8" placeholder="شرح" required>{{old('description')}}</textarea>
+                            <textarea name="description" class="form-control" rows="8" placeholder="الرسالة" required>{{old('description')}}</textarea>
                             <p class="text-danger">{{$errors->first('description')}}</p>
                         </div>
 
                         <div class="form-group m-auto">
-                            <button class="btn btn-primary pr-5 pl-5">ارسال</button>
+                            <button class="btn btn-primary pr-5 pl-5">بدء الدردشة</button>
                         </div>
 
                     </form>

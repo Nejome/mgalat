@@ -121,8 +121,8 @@ img{
 }
 .received_withd_msg { width: 100%;}
 .mesgs {
-    border-radius: 5px 0 0 5px;
-    padding: 30px 15px 0 25px;
+    border: 1px solid #efefef;
+    border-radius: 5px;
     background-color: #fff;
 }
 
@@ -145,7 +145,6 @@ img{
     color: #4c4c4c;
     font-size: 15px;
     min-height: 48px;
-    width: 100%;
 }
 
 .type_msg {
@@ -162,7 +161,7 @@ img{
     font-size: 17px;
     height: 33px;
     width: 33px;
-    padding-top: 7px;
+    padding-top: 1px;
     padding-right: 9px;
 }
 .messaging {
@@ -170,6 +169,6 @@ img{
 }
 
 .msg_history {
-    height: 400px;
+    height: 350px;
     overflow-y: scroll;
 }

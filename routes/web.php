@@ -31,7 +31,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
     Route::post('/support/start-chat', 'client\SupportController@createRoom');
 
-    Route::get('/support/chat', 'client\SupportController@chat');
+    Route::get('/support/{token}/getChatMessages', 'client\SupportController@getChatMessages');
+
+    Route::get('/support/{token}/chat', 'client\SupportController@chat');
 
     Route::get('/about_us', 'client\HomeController@about_us');
 

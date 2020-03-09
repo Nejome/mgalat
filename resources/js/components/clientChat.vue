@@ -3,50 +3,26 @@
 
         <div class="row">
 
-            <div class="col-md-5 pl-0 pr-0 inbox_people">
-
-                <div class="inbox_chat">
-
-                    <h3 v-if="providers.length == 0" class="text-center mt-5">لا توجد محادثات حتي الان</h3>
-
-                    <div v-for="provider in providers"
-                         :key="provider.id"
-                         :class="['chat_list', activeProvider.id === provider.id? 'active_chat': '']"
-                         @click="setActive(provider)"
-                    >
-                        <div class="chat_people">
-                            <div class="chat_img">
-                                <img :src="provider.image">
-                            </div>
-                            <div class="chat_ib">
-                                <h5>{{provider.name}}</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-md-7 pr-0">
+            <div class="col-md-10 m-auto pr-0">
 
                 <div class="mesgs">
 
                     <div id="messagesList" class="msg_history">
 
-                        <div v-for="(message, index) in allMessages" :class="[message.sender_id === 0? 'outgoing_msg': 'incoming_msg']">
+                        <div v-for="(message, index) in allMessages" :class="[message.sender_id === 1? 'outgoing_msg': 'incoming_msg']">
 
-                            <div v-if="message.sender_id !== 0" class="incoming_msg_img">
-                                <img :src="activeProvider.image">
+                            <div v-if="message.sender_id !== 1" class="incoming_msg_img">
+                                الادارة
                             </div>
 
-                            <div v-if="message.sender_id !== 0" class="received_msg">
+                            <div v-if="message.sender_id !== 1" class="received_msg">
                                 <div class="received_withd_msg">
                                     <p>{{message.message}}</p>
                                     <span class="time_date">{{message.created_at}}</span>
                                 </div>
                             </div>
 
-                            <div v-if="message.sender_id === 0" class="sent_msg">
+                            <div v-if="message.sender_id === 1" class="sent_msg">
                                 <p>{{message.message}}</p>
                                 <span class="time_date">{{message.created_at}}</span>
                             </div>
@@ -56,11 +32,11 @@
                     </div>
 
                     <div class="type_msg pt-3">
-                        <div class="input_msg_write">
-                            <div class="row">
-                                <div class="col-1 pt-2">
-                                    <button class="msg_send_btn" type="button" @click="sendMessage()"><i class="fa fa-paper-plane"></i></button>
-                                </div>
+                        <div class="input_msg_write row" style="margin: 0 !important;">
+                            <div class="col-1 pt-2">
+                                <button class="msg_send_btn" type="button" @click="sendMessage()"><i class="fa fa-paper-plane"></i></button>
+                            </div>
+                            <div class="col-11">
                                 <textarea v-model="message" @keypress.enter="sendMessage" class="col-11 write_msg" rows="5" placeholder="اكتب رسالتك" ></textarea>
                             </div>
                         </div>
@@ -80,9 +56,12 @@
 
         name: "clientChat",
 
+        props: ['tokenprop'],
+
         data() {
 
             return {
+                token: null,
                 message: null,
                 providers: null,
                 activeProvider: null,
@@ -93,9 +72,11 @@
 
         created() {
 
-            this.getProviders();
+            this.token = this.tokenprop;
 
-            Echo.private(`chat.0`)
+            this.getMessages();
+
+            /*Echo.private(`chat.0`)
 
                 .listen('MessageSent', (e) => {
 
@@ -103,7 +84,7 @@
 
                     this.getProviders();
 
-                });
+                });*/
 
         },
 
@@ -129,33 +110,11 @@
                 container.scrollTop = scrollHeight;
             },
 
-            getProviders() {
-
-                axios.get('/admin/messages/getProviders').then(response => {
-
-                    this.providers = response.data.data;
-
-                    if(this.activeProvider == null){
-                        this.activeProvider = this.providers[0];
-                    }
-
-                });
-
-            },
-
-            setActive(provider) {
-
-                this.activeProvider = provider;
-
-            },
-
             getMessages() {
 
-                if(!this.activeProvider){
-                    return alert('عفوا قم بإختيار مزود خدمة');
-                }
+                axios.get('/support/'+this.token+'/getChatMessages').then(response => {
 
-                axios.get('/api/messages/'+this.activeProvider.id+'/getMessages').then(response => {
+                    console.log(response.data);
 
                     this.allMessages = response.data;
 

@@ -2136,34 +2136,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "clientChat",
+  props: ['tokenprop'],
   data: function data() {
     return {
+      token: null,
       message: null,
       providers: null,
       activeProvider: null,
@@ -2171,14 +2149,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
-    this.getProviders();
-    Echo["private"]("chat.0").listen('MessageSent', function (e) {
-      _this.allMessages.push(e.message);
-
-      _this.getProviders();
-    });
+    this.token = this.tokenprop;
+    this.getMessages();
+    /*Echo.private(`chat.0`)
+         .listen('MessageSent', (e) => {
+             this.allMessages.push(e.message);
+             this.getProviders();
+         });*/
   },
   updated: function updated() {
     this.messageListScroll();
@@ -2194,33 +2171,16 @@ __webpack_require__.r(__webpack_exports__);
       var scrollHeight = container.scrollHeight;
       container.scrollTop = scrollHeight;
     },
-    getProviders: function getProviders() {
-      var _this2 = this;
-
-      axios.get('/admin/messages/getProviders').then(function (response) {
-        _this2.providers = response.data.data;
-
-        if (_this2.activeProvider == null) {
-          _this2.activeProvider = _this2.providers[0];
-        }
-      });
-    },
-    setActive: function setActive(provider) {
-      this.activeProvider = provider;
-    },
     getMessages: function getMessages() {
-      var _this3 = this;
+      var _this = this;
 
-      if (!this.activeProvider) {
-        return alert('عفوا قم بإختيار مزود خدمة');
-      }
-
-      axios.get('/api/messages/' + this.activeProvider.id + '/getMessages').then(function (response) {
-        _this3.allMessages = response.data;
+      axios.get('/support/' + this.token + '/getChatMessages').then(function (response) {
+        console.log(response.data);
+        _this.allMessages = response.data;
       });
     },
     sendMessage: function sendMessage() {
-      var _this4 = this;
+      var _this2 = this;
 
       if (!this.message) {
         return alert('عفوا قم بإدخال الرسالة');
@@ -2235,11 +2195,11 @@ __webpack_require__.r(__webpack_exports__);
         receiver_id: this.activeProvider.id,
         message: this.message
       }).then(function (response) {
-        _this4.message = null;
+        _this2.message = null;
 
-        _this4.messageListScroll();
+        _this2.messageListScroll();
 
-        _this4.allMessages.push(response.data.message);
+        _this2.allMessages.push(response.data.message);
       });
     }
   }
@@ -29882,51 +29842,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "messaging" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-5 pl-0 pr-0 inbox_people" }, [
-        _c(
-          "div",
-          { staticClass: "inbox_chat" },
-          [
-            _vm.providers.length == 0
-              ? _c("h3", { staticClass: "text-center mt-5" }, [
-                  _vm._v("لا توجد محادثات حتي الان")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._l(_vm.providers, function(provider) {
-              return _c(
-                "div",
-                {
-                  key: provider.id,
-                  class: [
-                    "chat_list",
-                    _vm.activeProvider.id === provider.id ? "active_chat" : ""
-                  ],
-                  on: {
-                    click: function($event) {
-                      return _vm.setActive(provider)
-                    }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "chat_people" }, [
-                    _c("div", { staticClass: "chat_img" }, [
-                      _c("img", { attrs: { src: provider.image } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "chat_ib" }, [
-                      _c("h5", [_vm._v(_vm._s(provider.name))])
-                    ])
-                  ])
-                ]
-              )
-            })
-          ],
-          2
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-7 pr-0" }, [
+      _c("div", { staticClass: "col-md-10 m-auto pr-0" }, [
         _c("div", { staticClass: "mesgs" }, [
           _c(
             "div",
@@ -29936,17 +29852,19 @@ var render = function() {
                 "div",
                 {
                   class: [
-                    message.sender_id === 0 ? "outgoing_msg" : "incoming_msg"
+                    message.sender_id === 1 ? "outgoing_msg" : "incoming_msg"
                   ]
                 },
                 [
-                  message.sender_id !== 0
+                  message.sender_id !== 1
                     ? _c("div", { staticClass: "incoming_msg_img" }, [
-                        _c("img", { attrs: { src: _vm.activeProvider.image } })
+                        _vm._v(
+                          "\n                            الادارة\n                        "
+                        )
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  message.sender_id !== 0
+                  message.sender_id !== 1
                     ? _c("div", { staticClass: "received_msg" }, [
                         _c("div", { staticClass: "received_withd_msg" }, [
                           _c("p", [_vm._v(_vm._s(message.message))]),
@@ -29958,7 +29876,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  message.sender_id === 0
+                  message.sender_id === 1
                     ? _c("div", { staticClass: "sent_msg" }, [
                         _c("p", [_vm._v(_vm._s(message.message))]),
                         _vm._v(" "),
@@ -29974,8 +29892,13 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "type_msg pt-3" }, [
-            _c("div", { staticClass: "input_msg_write" }, [
-              _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass: "input_msg_write row",
+                staticStyle: { margin: "0 !important" }
+              },
+              [
                 _c("div", { staticClass: "col-1 pt-2" }, [
                   _c(
                     "button",
@@ -29992,38 +29915,46 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.message,
-                      expression: "message"
-                    }
-                  ],
-                  staticClass: "col-11 write_msg",
-                  attrs: { rows: "5", placeholder: "اكتب رسالتك" },
-                  domProps: { value: _vm.message },
-                  on: {
-                    keypress: function($event) {
-                      if (
-                        !$event.type.indexOf("key") &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
+                _c("div", { staticClass: "col-11" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.message,
+                        expression: "message"
                       }
-                      return _vm.sendMessage($event)
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                    ],
+                    staticClass: "col-11 write_msg",
+                    attrs: { rows: "5", placeholder: "اكتب رسالتك" },
+                    domProps: { value: _vm.message },
+                    on: {
+                      keypress: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.sendMessage($event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.message = $event.target.value
                       }
-                      _vm.message = $event.target.value
                     }
-                  }
-                })
-              ])
-            ])
+                  })
+                ])
+              ]
+            )
           ])
         ])
       ])
