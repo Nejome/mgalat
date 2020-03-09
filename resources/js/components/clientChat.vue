@@ -1,5 +1,4 @@
 <template>
-
     <div class="messaging">
 
         <div class="row">
@@ -74,14 +73,12 @@
         </div>
 
     </div>
-
 </template>
 
 <script>
-
     export default {
 
-        name: "Chat",
+        name: "clientChat",
 
         data() {
 
@@ -148,7 +145,7 @@
 
             setActive(provider) {
 
-               this.activeProvider = provider;
+                this.activeProvider = provider;
 
             },
 
@@ -190,7 +187,6 @@
         },
 
     }
-
 </script>
 
 <style scoped>

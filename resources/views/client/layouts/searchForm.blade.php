@@ -60,3 +60,7 @@
         </div>
     </div>
 </div>
+
+@push('pageScript')
+    <script src="{{asset('client/myJs/searchForm.js')}}"></script>
+@endpush

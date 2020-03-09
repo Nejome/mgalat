@@ -53,9 +53,11 @@ class SupportController extends Controller
 
     }
 
-    public function chat($token) {
+    public function chat() {
 
+        $current = 'support';
 
+        return view('client.support.chat', compact('current'));
 
     }
 

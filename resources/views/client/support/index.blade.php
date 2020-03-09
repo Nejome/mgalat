@@ -13,8 +13,7 @@
                         <a href="{{$setting->android_link}}">
                             <img src="{{asset('client/images/google_play.png')}}" width="128" height="40">
                         </a>
-                        <a class="d-inline-block mt-1 mt-xyatech
-                        l-0" href="{{$setting->ios_link}}">
+                        <a class="d-inline-block mt-1 mt-xyatechl-0" href="{{$setting->ios_link}}">
                             <img src="{{asset('client/images/apple_store.png')}}" width="128" height="40">
                         </a>
                     </div>

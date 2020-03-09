@@ -14,7 +14,7 @@
         <hr class="mt-5">
     </div>--}}
 
-    <input type="hidden" id="locationsCount" value="{{$providers->count()}}">
+    <input type="hidden" id="locationsCount" value="{{$special_providers_count}}">
     <input id="icon" type="hidden" value="{{asset('client/images/placeholder.svg')}}">
     @if(count($special_providers) > 0)
         @php $x = 1; @endphp
@@ -129,3 +129,7 @@
     </section>
 
 @endsection
+
+@push('pageScript')
+    <script src="{{asset('client/myJs/departmentMap.js')}}"></script>
+@endpush

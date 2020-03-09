@@ -4,7 +4,7 @@
 
     @if($provider->images->count() > 0 && $provider->is_special == 1)
 
-        <section class="slider">
+        <section class="slider" v-pre>
             <div class="nav-container">
                 <a class="next float-left" onclick="plusSlides(1)">❯</a>
                 <a class="prev float-right" onclick="plusSlides(-1)">❮</a>
@@ -1253,3 +1253,11 @@
     </section>
 
 @endsection
+
+@push('pageScript')
+    <script src="{{asset('client/myJs/providerLocation.js')}}"></script>
+    <script src="{{asset('client/myJs/rating.js')}}"></script>
+    @if($provider->images->count() > 0 && $provider->is_special == 1)
+        <script src="{{asset('client/slider/slider.js')}}"></script>
+    @endif
+@endpush

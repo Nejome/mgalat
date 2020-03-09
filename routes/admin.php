@@ -5,6 +5,7 @@
 Route::get('/', 'admin\SessionsController@login_page')->name('login');
 Route::post('/login', 'admin\SessionsController@login');
 
+Route::get('messages/getProviders', 'admin\MessageController@getProviders');
 
 Route::middleware('auth')->group(function() {
 
@@ -144,7 +145,6 @@ Route::middleware('auth')->group(function() {
         Route::get('support/{support}/delete', 'admin\SupportController@delete');
         Route::get('messages', 'admin\MessageController@index');
         Route::post('messages/sendMessage', 'admin\MessageController@sendMessage');
-        Route::get('messages/getProviders', 'admin\MessageController@getProviders');
 
     });
 

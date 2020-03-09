@@ -91,3 +91,7 @@
     </section>
 
 @endsection
+
+@push('pageScript')
+    <script src="{{asset('client/myJs/searchMap.js')}}"></script>
+@endpush
