@@ -1,7 +1,7 @@
 <?php
 
-Broadcast::channel('chat.{receiver_id}', function () {
+Broadcast::channel('chat.{room_id}', function () {
 
-    return auth()->check();
+    return true;
 
 });

@@ -27,7 +27,7 @@
 
                 <div class="col-md-7 m-auto order-1 order-md-2 mb-sm-5 text-center">
 
-                    <client-chat tokenProp="{{$token}}"></client-chat>
+                    <client-chat tokenprop="{{$room->token}}" roomid="{{$room->id}}"></client-chat>
 
                 </div>
 

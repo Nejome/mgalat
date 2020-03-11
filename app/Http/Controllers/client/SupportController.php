@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Support;
@@ -93,7 +94,7 @@ class SupportController extends Controller
 
         }else {
 
-            return null;
+            return false;
 
         }
 
@@ -101,9 +102,49 @@ class SupportController extends Controller
 
     public function chat($token) {
 
-        $current = 'support';
+        $room = chatRoom::where('token', $token)->first();
 
-        return view('client.support.chat', compact(['current', 'token']));
+        if($room){
+
+            $current = 'support';
+
+            return view('client.support.chat', compact(['current', 'room']));
+
+        }else {
+
+            $current = 'support';
+
+            session()->flash('room_not_exist', 'عفواً قم بإعادة المحاولة');
+
+            return view('client.support.start-chat', compact('current'));
+
+
+        }
+
+    }
+
+    public function sendMessage(Request $request, $token) {
+
+        $room = chatRoom::where('token', $token)->first();
+
+        if($room){
+
+            $message = new Message;
+            $message->room_id = $room->id;
+            $message->sender_id = $request->sender_id;
+            $message->receiver_id = $request->receiver_id;
+            $message->message = $request->message;
+            $message->save();
+
+            broadcast(new MessageSent($message))->toOthers();
+
+            return response(['message' => $message]);
+
+        }else {
+
+            return false;
+
+        }
 
     }
 

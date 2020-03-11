@@ -56,12 +56,13 @@
 
         name: "clientChat",
 
-        props: ['tokenprop'],
+        props: ['tokenprop', 'roomid'],
 
         data() {
 
             return {
                 token: null,
+                roomId: null,
                 message: null,
                 providers: null,
                 activeProvider: null,
@@ -74,31 +75,23 @@
 
             this.token = this.tokenprop;
 
+            this.roomId = this.roomid;
+
             this.getMessages();
 
-            /*Echo.private(`chat.0`)
+            Echo.private(`chat.`+this.roomid)
 
                 .listen('MessageSent', (e) => {
 
                     this.allMessages.push(e.message);
 
-                    this.getProviders();
-
-                });*/
+                });
 
         },
 
         updated() {
 
             this.messageListScroll();
-
-        },
-
-        watch: {
-
-            activeProvider(val) {
-                this.getMessages();
-            }
 
         },
 
@@ -128,19 +121,17 @@
                     return alert('عفوا قم بإدخال الرسالة');
                 }
 
-                if(!this.activeProvider){
-                    return alert('عفوا قم بتحديد مزود خدمة اولا');
-                }
-
-                axios.post('/admin/messages/sendMessage', {
-                    sender_id: 0,
-                    receiver_id: this.activeProvider.id,
+                axios.post('/support/'+this.token+'/sendMessage', {
+                    token: this.token,
+                    sender_id: 1,
+                    receiver_id: 0,
                     message: this.message
                 }).then(response => {
                     this.message = null;
                     this.messageListScroll();
                     this.allMessages.push(response.data.message);
                 });
+
             }
 
         },

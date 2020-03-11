@@ -142,9 +142,12 @@ Route::middleware('auth')->group(function() {
         Route::get('support', 'admin\SupportController@index');
         Route::get('support/{support}/show', 'admin\SupportController@show');
         Route::get('support/{support}/delete', 'admin\SupportController@delete');
-        Route::get('messages', 'admin\MessageController@index');
-        Route::post('messages/sendMessage', 'admin\MessageController@sendMessage');
-        Route::get('messages/getProviders', 'admin\MessageController@getProviders');
+
+        //**********Chat**********//
+        Route::get('chats', 'admin\ChatController@index');
+        Route::get('chats/{room}/chat', 'admin\ChatController@chat');
+        Route::get('chats/{room}/delete', 'admin\ChatController@delete');
+        Route::post('messages/sendMessage', 'admin\ChatController@sendMessage');
 
     });
 

@@ -8,13 +8,22 @@ use App\Provider;
 use Illuminate\Http\Request;
 use App\Message;
 use App\Http\Resources\Provider as ProviderResource;
+use App\chatRoom;
 
-class MessageController extends Controller
+class ChatController extends Controller
 {
 
     public function index() {
 
-        return view('admin.support.messages');
+        $rooms = chatRoom::all();
+
+        return view('admin.support.chat-list', compact(['rooms']));
+
+    }
+
+    public function chat(chatRoom $room) {
+
+        return view('admin.support.chat', compact(['room']));
 
     }
 

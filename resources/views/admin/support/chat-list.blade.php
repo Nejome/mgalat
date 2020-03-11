@@ -12,11 +12,7 @@
                         <div class="row align-items-center">
 
                             <div class="col">
-                                <h2 class="mb-0">الاستعلامات</h2>
-                            </div>
-
-                            <div class="col-4 text-left">
-                                <a href="{{url('admin/chats')}}" class="btn btn-sm btn-primary">الرسائل</a>
+                                <h2 class="mb-0">المحادثات</h2>
                             </div>
 
                         </div>
@@ -37,7 +33,7 @@
                             <thead class="thead-light">
                             <tr class="text-center">
                                 <th scope="col">الاسم</th>
-                                <th scope="col">الموضوع</th>
+                                <th scope="col">العنوان</th>
                                 <th scope="col">البريد الالكتروني</th>
                                 <th scope="col">رقم الهاتف</th>
                                 <th scope="col">التاريخ</th>
@@ -46,13 +42,13 @@
                             </thead>
                             <tbody>
 
-                            @foreach($support as $row)
+                            @foreach($rooms as $row)
 
                                 <tr class="text-center">
 
                                     <td>{{$row->name}}</td>
 
-                                    <td>{{$row->subject}}</td>
+                                    <td>{{$row->title}}</td>
 
                                     <td>{{$row->email}}</td>
 
@@ -62,11 +58,11 @@
 
                                     <td>
 
-                                        <a href="{{url('admin/support/'.$row->id.'/show')}}">
+                                        <a href="{{url('admin/chats/'.$row->id.'/chat')}}">
                                             <i class="fas fa-eye text-green"></i>
                                         </a>
                                         &nbsp;&nbsp;&nbsp;
-                                        <a href="#" onclick="delete_confirm('{{$row->id}}', '{{url('admin/support/'.$row->id.'/delete')}}')">
+                                        <a href="#" onclick="delete_confirm('{{$row->id}}', '{{url('admin/chats/'.$row->id.'/delete')}}')">
                                             <i class="fas fa-trash text-danger"></i>
                                         </a>
 
@@ -88,7 +84,7 @@
 
     <script>
         function delete_confirm(id, url) {
-            var result = confirm('هل انت متأكد انك تريد حذف هذا الاستعلام ؟');
+            var result = confirm('هل انت متأكد انك تريد حذف هذه المحادثة؟');
             if(result){
                 location.href = url;
             }

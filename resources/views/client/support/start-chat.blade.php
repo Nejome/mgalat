@@ -7,6 +7,7 @@
             <div class="row">
 
                 <div class="col-md-3 text-center order-2 order-md-1 pt-5">
+
                     <h4>أفضل مقدمي الخدمات بين يديك <span style="color: #2386c9;">مجالات تك</span> - لكل ما تحتاج </h4>
                     <p class="mb-0 mt-3">قم يتحميل التطبيق وتمتع بتلبية طلباتك مجاناً</p>
                     <div class="mt-2">
@@ -26,6 +27,11 @@
                 </div>
 
                 <div class="col-md-7 m-auto order-1 order-md-2 mb-sm-5 text-center">
+
+                    @if(session()->has('room_not_exist'))
+                        <div class="alert alert-danger">{{session()->get('room_not_exist')}}</div>
+                    @endif
+
                     <h1>يسعدنا تواصلكم معنا عبر الدردشة</h1>
                     <p>قم بتعبئة النموذج ادناه لبدء الدردشة فوراً مع الادارة.. شكراً لتواصلكم معنا</p>
 
