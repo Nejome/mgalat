@@ -15,7 +15,7 @@ class ChatController extends Controller
 
     public function index() {
 
-        $rooms = chatRoom::all();
+        $rooms = chatRoom::orderBy('id', 'desc')->get();
 
         return view('admin.support.chat-list', compact(['rooms']));
 
@@ -27,31 +27,19 @@ class ChatController extends Controller
 
     }
 
-    public function getProviders() {
 
-        $providers_id = Message::where('sender_id', '!=', 0)->get('sender_id');
+    public function getMessages(chatRoom $room) {
 
-        $providers = Provider::whereIn('id', $providers_id)->get();
-
-        return ProviderResource::collection($providers);
-
-    }
-
-    public function getMessages($provider) {
-
-        $messages = Message::where(['sender_id' => 0, 'receiver_id' => $provider])
-            ->orWhere(function($query) use($provider){
-                $query->where(['sender_id' => $provider, 'receiver_id' => 0]);
-            })
-            ->get();
+        $messages = Message::where('room_id', $room->id)->get();
 
         return $messages;
 
     }
 
-    public function sendMessage(Request $request) {
+    public function sendMessage(Request $request, chatRoom $room) {
 
         $message = new Message;
+        $message->room_id = $room->id;
         $message->sender_id = $request->sender_id;
         $message->receiver_id = $request->receiver_id;
         $message->message = $request->message;
@@ -59,7 +47,17 @@ class ChatController extends Controller
 
         broadcast(new MessageSent($message))->toOthers();
 
-        return response(['message'=>$message, 'status'=> 1]);
+        return response(['message' => $message]);
+
+    }
+
+    public function delete(chatRoom $room) {
+
+        $room->delete();
+
+        session()->flash('deleted', 'تم حذف المحادثة بنجاح');
+
+        return redirect()->back();
 
     }
 

@@ -72,6 +72,11 @@ Route::post('rateApplication', 'api\GeneralDataController@rateApplication');
 
 Route::get('getApplicationRateTotal', 'api\GeneralDataController@getApplicationRateTotal');
 
-Route::get('messages/{provider}/getMessages', 'admin\MessageController@getMessages');
+/*=============== Chat  ===============*/
 
+Route::post('/chats/start', 'api\GeneralDataController@startChat');
+
+Route::get('/chats/{room}/getMessages', 'api\GeneralDataController@getChatMessages');
+
+Route::post('/chats/{room}/sendMessage', 'api\GeneralDataController@sendChatMessage');
 

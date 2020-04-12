@@ -47,6 +47,24 @@ Table of Content:
     display: none;
 }
 
+#chat-btn {
+    display: block;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100;
+    background-color: #2386c9;
+    border-radius: 50%;
+    border: 1px solid #2386c9;
+    color: #ffffff;
+    width: 61px;
+    height: 61px;
+    padding-top: 11px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-size: 34px;
+    text-align: center;
+}
+
 .list_style {
   list-style: none;
   margin: 0px;
@@ -1036,6 +1054,7 @@ button:focus {
     color: #c3c3c3;
     border: 1px solid #c3c3c3;
     text-align: center;
+    font-family: 'Tajawal', sans-serif;
 }
 
 .search-form input:focus {
@@ -2534,6 +2553,12 @@ button:focus {
 }
 
 @media (max-width: 767px) {
+
+    #chat-btn {
+        right: 20px;
+        bottom: 15px;
+    }
+
   .comment-form .name {
     padding-right: 0px;
     margin-bottom: 1rem;

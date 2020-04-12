@@ -92,6 +92,11 @@ img{
     width: 10%;
 }
 
+.incoming_msg {
+    overflow: hidden;
+    margin: 26px 0 26px;
+}
+
 .incoming_msg_img img {
     width: 100%;
     height: auto;
@@ -102,8 +107,13 @@ img{
     display: inline-block;
     padding: 0 0 0 10px;
     vertical-align: top;
-    width: 89%;
+    width: 100%;
 }
+
+.write_msg:focus {
+    outline: none;
+}
+
 .received_withd_msg p {
     background: #ebebeb none repeat scroll 0 0;
     border-radius: 3px;
@@ -165,7 +175,11 @@ img{
     padding-right: 9px;
 }
 .messaging {
-    padding: 0 0 50px 0;
+    padding: 0 0 10px 0;
+}
+
+.msg_send_btn:focus {
+    outline: none;
 }
 
 .msg_history {

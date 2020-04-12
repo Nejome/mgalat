@@ -146,8 +146,10 @@ Route::middleware('auth')->group(function() {
         //**********Chat**********//
         Route::get('chats', 'admin\ChatController@index');
         Route::get('chats/{room}/chat', 'admin\ChatController@chat');
+        Route::get('chats/{room}/getMessages', 'admin\ChatController@getMessages');
+        Route::post('chats/{room}/sendMessage', 'admin\ChatController@sendMessage');
         Route::get('chats/{room}/delete', 'admin\ChatController@delete');
-        Route::post('messages/sendMessage', 'admin\ChatController@sendMessage');
+
 
     });
 

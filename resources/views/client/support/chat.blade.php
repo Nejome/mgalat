@@ -27,12 +27,23 @@
 
                 <div class="col-md-7 m-auto order-1 order-md-2 mb-sm-5 text-center">
 
-                    <client-chat tokenprop="{{$room->token}}" roomid="{{$room->id}}"></client-chat>
+                    <client-chat tokenprop="{{$room->token}}" roomid="{{$room->id}}" imageprop="{{asset('cp/images/loading.gif')}}"></client-chat>
+
+                    <a href="#" onclick="exist_confirm('{{url('/')}}')" class="btn btn-danger">انهاء المحادثة</a>
 
                 </div>
 
             </div>
         </div>
     </section>
+
+    <script>
+        function exist_confirm(url) {
+            var result = confirm('هل انت متأكد انك تريد انهاء المحادثة؟');
+            if(result){
+                location.href = url;
+            }
+        }
+    </script>
 
 @endsection

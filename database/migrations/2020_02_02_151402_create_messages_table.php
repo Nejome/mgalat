@@ -19,7 +19,7 @@ class CreateMessagesTable extends Migration
             $table->integer('sender_id');
             $table->integer('receiver_id');
             $table->text('message');
-            $table->foreign('room_id')->references('id')->on('chat_rooms');
+            $table->foreign('room_id')->references('id')->on('chat_rooms')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -30,6 +30,10 @@
 
     @include('client.layouts.footer')
 
+    <a href="{{url('support/start-chat')}}" id="chat-btn">
+        <i class="fa fa-comments"></i>
+    </a>
+
 @endsection
 
 @push('footerTags')

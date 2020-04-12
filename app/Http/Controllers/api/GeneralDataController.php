@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\api;
 
 use App\Department;
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
+use App\Message;
 use App\Provider;
 use App\Specialty;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Setting;
 use App\Http\Resources\Setting as SettingResource;
@@ -16,6 +19,7 @@ use App\Http\Resources\Specialty as SpecialtyResource;
 use App\Http\Resources\Provider as ProviderResource;
 use Illuminate\Support\Facades\DB;
 use App\ApplicationRate;
+use App\chatRoom;
 
 class GeneralDataController extends Controller
 {
@@ -229,6 +233,114 @@ class GeneralDataController extends Controller
         $data['responsiveness'] = ApplicationRate::responsivenessTotal();
 
         return response()->json(['data' => $data, 'status' => 1]);
+
+    }
+
+    /*=============== Chat  ===============*/
+
+    public function startChat(Request $request) {
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $token = md5(rand());
+
+        $room = new chatRoom();
+        $room->name = $request->name;
+        $room->email = $request->email;
+        $room->phone = $request->phone;
+        $room->title = $request->title;
+        $room->token = $token;
+        $room->save();
+
+        $message = new Message();
+        $message->room_id = $room->id;
+        $message->sender_id = 1;
+        $message->receiver_id = 0;
+        $message->message = $request->description;
+        $message->save();
+
+        $data['room'] = $room;
+
+        $data['message'] = $message;
+
+        $setting = Setting::find(1);
+
+        if(isset($setting->phone) && $setting->phone != ''){
+
+            $client = new Client();
+
+            $smsData = [
+                'json' => [
+                    "Username" => "0505349879",
+                    "Password" => "EID9879eid",
+                    "Tagname" => "MJALATTK-AD",
+                    "RecepientNumber" => $setting->phone,
+                    "Message" => 'قام احد العملاء ببدء محادثة جديدة في الموقع',
+                ]
+            ];
+
+            $client->post("http://api.yamamah.com/SendSMS", $smsData);
+
+        }
+
+        return response()->json(['data' => $data, 'status' => 1]);
+
+    }
+
+    public function getChatMessages($room) {
+
+        $room = chatRoom::find($room);
+
+        if($room){
+
+            $data['messages'] = Message::where('room_id', $room->id)->get();
+
+            return response()->json(['data' => $data, 'status' => 1]);
+
+        }else{
+
+            return response()->json(['message' => trans('general_api.chatNotExist'), 'status' => 0]);
+
+        }
+
+    }
+
+    public function sendChatMessage(Request $request, $room) {
+
+        $this->validate($request, [
+            'message' => 'required',
+        ]);
+
+        $room = chatRoom::find($room)->first();
+
+        if($room){
+
+            $message = new Message;
+            $message->room_id = $room->id;
+            $message->sender_id = 1;
+            $message->receiver_id = 0;
+            $message->message = $request->message;
+            $message->save();
+
+            $data['room'] = $room;
+
+            $data['message'] = $message;
+
+            broadcast(new MessageSent($message))->toOthers();
+
+            return response(['data' => $data, 'status' => 1]);
+
+        }else {
+
+            return response()->json(['message' => trans('general_api.chatNotExist'), 'status' => 0]);
+
+        }
 
     }
 

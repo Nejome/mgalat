@@ -58,4 +58,10 @@
 
     </div>
 
+    @push('pageScript')
+
+        <script src="{{asset('cp/assets/js/providerLocation.js')}}"></script>
+
+    @endpush
+
 @endsection

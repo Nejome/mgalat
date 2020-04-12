@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Support;
 use App\chatRoom;
 use App\Message;
+use App\Setting;
+use GuzzleHttp\Client;
 
 class SupportController extends Controller
 {
@@ -77,6 +79,26 @@ class SupportController extends Controller
         $message->receiver_id = 0;
         $message->message = $request->description;
         $message->save();
+
+        $setting = Setting::find(1);
+
+        if(isset($setting->phone) && $setting->phone != ''){
+
+            $client = new Client();
+
+            $data = [
+                'json' => [
+                    "Username" => "0505349879",
+                    "Password" => "EID9879eid",
+                    "Tagname" => "MJALATTK-AD",
+                    "RecepientNumber" => $setting->phone,
+                    "Message" => 'قام احد العملاء ببدء محادثة جديدة في الموقع',
+                ]
+            ];
+
+            $client->post("http://api.yamamah.com/SendSMS", $data);
+
+        }
 
         return redirect(url('support/'.$room->token.'/chat'));
 

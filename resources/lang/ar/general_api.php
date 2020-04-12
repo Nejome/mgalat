@@ -9,5 +9,6 @@ return [
     'searchLocationValidation' => 'عفوا قم بتحدد موقعك',
     'noSearchResult' => 'عفوا لم يتم العثور علي نتيجة بحث مطابقة',
     'noNearestProviders' => 'عفوا لا يوجد مزودي خدمة قريبين منك حالياً',
+    'chatNotExist' => 'عفوا المحادثة غير موجودة',
 
 ];

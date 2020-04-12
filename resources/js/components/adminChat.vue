@@ -9,16 +9,16 @@
 
                     <div id="messagesList" class="msg_history">
 
-                        <div v-for="(message, index) in allMessages" :class="[message.sender_id === 1? 'outgoing_msg': 'incoming_msg']">
+                        <div v-for="(message, index) in allMessages" :class="[message.sender_id === 0? 'outgoing_msg': 'incoming_msg']">
 
-                            <div v-if="message.sender_id !== 1" class="received_msg">
+                            <div v-if="message.sender_id !== 0" class="received_msg">
                                 <div class="received_withd_msg">
                                     <p>{{message.message}}</p>
                                     <span class="time_date">{{message.created_at}}</span>
                                 </div>
                             </div>
 
-                            <div v-if="message.sender_id === 1" class="sent_msg">
+                            <div v-if="message.sender_id === 0" class="sent_msg">
                                 <p>{{message.message}}</p>
                                 <span class="time_date">{{message.created_at}}</span>
                             </div>
@@ -30,7 +30,7 @@
                     <div class="type_msg pt-3">
                         <div class="input_msg_write row" style="margin: 0 !important;">
                             <div class="col-1 pt-2">
-                                <button class="msg_send_btn" type="button" @click="sendMessage()"><i class="fa fa-paper-plane"></i></button>
+                                <button  class="msg_send_btn" type="button" @click="sendMessage()"><i class="fa fa-paper-plane"></i></button>
                                 <img v-if="loading" :src="image" style="position: absolute; width: 50px; height: 50px;">
                             </div>
                             <div class="col-11">
@@ -51,7 +51,7 @@
 <script>
     export default {
 
-        name: "clientChat",
+        name: "adminChat",
 
         props: ['tokenprop', 'roomid', 'imageprop'],
 
@@ -104,7 +104,7 @@
 
             getMessages() {
 
-                axios.get('/support/'+this.token+'/getChatMessages').then(response => {
+                axios.get('/admin/chats/'+this.roomId+'/getMessages').then(response => {
 
                     this.allMessages = response.data;
 
@@ -120,10 +120,10 @@
 
                 this.loading = true;
 
-                axios.post('/support/'+this.token+'/sendMessage', {
+                axios.post('/admin/chats/'+this.roomId+'/sendMessage', {
                     token: this.token,
-                    sender_id: 1,
-                    receiver_id: 0,
+                    sender_id: 0,
+                    receiver_id: 1,
                     message: this.message
                 }).then(response => {
                     this.message = null;

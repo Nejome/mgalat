@@ -36,34 +36,9 @@
     <script src="{{asset('cp/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
     <script src="{{asset('cp/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
     <script src="{{asset('cp/assets/js/argon.js?v=1.0.0')}}"></script>
-    <script src="{{asset('cp/ckeditor/ckeditor.js')}}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKUtiN-bHruEDPRjKN_-qjq1Kg8WAOjUI"></script>
-    <script src="{{asset('cp/assets/js/providerLocation.js')}}"></script>
 
-    <script>
-
-        CKEDITOR.replace('details_ar', {
-            language: "ar",
-        });
-        CKEDITOR.replace('details_en', {
-            language: "en"
-        });
-
-        CKEDITOR.replace('terms_conditions_ar', {
-            language: "ar",
-        });
-        CKEDITOR.replace('terms_conditions_en', {
-            language: "en"
-        });
-
-        CKEDITOR.replace('usage_policy_ar', {
-            language: "ar",
-        });
-        CKEDITOR.replace('usage_policy_en', {
-            language: "en"
-        });
-
-    </script>
+    @stack('pageScript')
 
     <script>
 
