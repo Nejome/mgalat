@@ -30,6 +30,8 @@ Route::group(['prefix' => 'providers'], function () {
 
         Route::get('logout', 'api\providers\ProviderController@logout');
 
+        Route::get('deleteAccount', 'api\providers\ProviderController@deleteAccount');
+
         Route::post('/{provider}/update', 'api\providers\ProviderController@update');
 
         Route::post('/{provider}/updateContact', 'api\providers\ProviderController@updateContact');
@@ -75,6 +77,8 @@ Route::get('getApplicationRateTotal', 'api\GeneralDataController@getApplicationR
 /*=============== Chat  ===============*/
 
 Route::post('/chats/start', 'api\GeneralDataController@startChat');
+
+Route::get('/chats/{phone}/getChats', 'api\GeneralDataController@getChats');
 
 Route::get('/chats/{room}/getMessages', 'api\GeneralDataController@getChatMessages');
 

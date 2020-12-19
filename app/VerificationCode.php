@@ -21,8 +21,8 @@ class VerificationCode extends Model
             $exist_code->delete();
         }
 
-         $verification_code = static::create([
-           'phone' => $phone,
+        $verification_code = static::create([
+            'phone' => $phone,
             'code' => $code
         ]);
 

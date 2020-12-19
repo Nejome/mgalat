@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\providers;
 
 use App\Http\Controllers\Controller;
 use App\WorkingDayes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Provider;
 use App\VerificationCode;
@@ -21,7 +22,6 @@ class ProviderController extends Controller
         if(VerificationCode::generate($request->phone)) {
 
             return response()->json(['message' => trans('provider_api.verification_sent'), 'data' => ['phone' => $request->phone], 'status' => 1]);
-
 
         } else {
 
@@ -48,7 +48,7 @@ class ProviderController extends Controller
 
             if($provider) {
 
-                if($provider->active != 1) {
+                if($provider->active != 1 || $provider->deleted_at != null) {
 
                     return response()->json(['message' => __('provider_api.inactive'), 'data' => ['phone' => $code->phone], 'status' => 0]);
 
@@ -208,6 +208,18 @@ class ProviderController extends Controller
         $request->user()->token()->delete();
 
         return response()->json(['message' => trans('provider_api.logged_out'), 'status' => 1]);
+
+    }
+
+    public function deleteAccount(Request $request) {
+
+        $provider = $request->user();
+        $provider->deleted_at = Carbon::now();
+        $provider->save();
+
+        $request->user()->token()->delete();
+
+        return response()->json(['message' => trans('provider_api.deleted'), 'status' => 1]);
 
     }
 

@@ -293,6 +293,19 @@ class GeneralDataController extends Controller
 
     }
 
+    public function getChats($phone) {
+
+        $chats = chatRoom::where('phone', $phone)->get();
+
+        if($chats->count()){
+            $data['chats'] = $chats;
+            return response(['data' => $data, 'status' => 1]);
+        }else{
+            return response()->json(['message' => trans('general_api.noChats'), 'status' => 0]);
+        }
+
+    }
+
     public function getChatMessages($room) {
 
         $room = chatRoom::find($room);
@@ -317,7 +330,7 @@ class GeneralDataController extends Controller
             'message' => 'required',
         ]);
 
-        $room = chatRoom::find($room)->first();
+        $room = chatRoom::find($room);
 
         if($room){
 

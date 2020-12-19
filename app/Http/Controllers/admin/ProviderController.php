@@ -16,7 +16,7 @@ class ProviderController extends Controller
 
     public function index() {
 
-       $providers = Provider::latest()->paginate(5);
+       $providers = Provider::where('deleted_at', null)->latest()->paginate(5);
 
        return view('admin.providers.index', compact(['providers']));
 

@@ -49,13 +49,13 @@
                                                         </div>
 
                                                         <div class="text-center text-muted mb-2">
-                                                            <small>التخصص</small>
+                                                            <small>القسم</small>
                                                         </div>
 
                                                         <div class="form-group mb-3">
                                                             <div class="input-group input-group-alternative">
                                                                 <select name="department_id" class="form-control">
-                                                                    <option disabled selected>اختر التخصص</option>
+                                                                    <option disabled selected>اختر القسم</option>
                                                                     @foreach($departments as $row)
                                                                         <option value="{{$row->id}}">{{$row->title}}</option>
                                                                     @endforeach

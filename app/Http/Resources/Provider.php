@@ -32,7 +32,8 @@ class Provider extends JsonResource
             'special_until' => $this->special_until,
             'views' => $this->views,
             'image' => asset('uploads/providers/'.$this->image),
-            'ratingTotal' => $this->ratingTotal()
+            'ratingTotal' => $this->ratingTotal(),
+            'location' => $this->location
         ];
     }
 }

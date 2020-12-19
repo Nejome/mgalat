@@ -8,7 +8,7 @@ return [
     'logged_out' => 'logged out successful',
     'incorrect_code' => 'The verification code you entered does not match',
     'logged_in' => 'Logged in successfully',
-    'inactive' => 'Sorry, your account is not active at the moment, review the administration for more details',
+    'inactive' => 'Sorry, your account is not active at the moment or you have been delete it, review the administration for more details',
     'registered' => 'successfully registered',
     'updated' => 'Your data has been updated successfully',
     'workingDaysUpdated' => 'Work schedules for the week updated successfully',
@@ -24,5 +24,6 @@ return [
     'locationUpdated' => 'Your location has been updated successfully',
     'rated' => 'Your rate added successfully',
     'viewAdded' => 'Provider views increased successfully',
+    'deleted' => 'Your account has been deleted successfully',
 
 ];
