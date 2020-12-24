@@ -25,12 +25,17 @@ class SpecialtyController extends Controller
         $this->validate($request, [
             'title_en' => 'required',
             'title_ar' => 'required',
-            'department_id' => 'required'
+            'department_id' => 'required',
+            'image' => 'required|image',
         ]);
+
+        $image_name = time().'.'.request()->image->getClientOriginalExtension();
+        $request->image->move(public_path('uploads/specialtiesImages/'), $image_name);
 
         $specialty = new Specialty();
         $specialty->setTranslations('title', ['ar' => $request->title_ar, 'en' => $request->title_en]);
         $specialty->department_id = $request->department_id;
+        $specialty->image = $image_name;
         $specialty->save();
 
         session()->flash('created', 'تم اضافة التخصص الجديد بنجاح');
@@ -52,8 +57,20 @@ class SpecialtyController extends Controller
         $this->validate($request, [
             'title_en' => 'required',
             'title_ar' => 'required',
-            'department_id' => 'required'
+            'department_id' => 'required',
+            'image' => 'image',
         ]);
+
+        if(isset($request->image) && $request->image != ''){
+            $new_image = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('uploads/specialtiesImages/'), $new_image);
+            if($specialty->image){
+                if(file_exists(public_path('uploads/specialtiesImages/'.$specialty->image))){
+                    unlink(public_path('uploads/specialtiesImages/'.$specialty->image));
+                }
+            }
+            $specialty->image = $new_image;
+        }
 
         $specialty->setTranslations('title', ['ar' => $request->title_ar, 'en' => $request->title_en]);
         $specialty->department_id = $request->department_id;
@@ -74,6 +91,10 @@ class SpecialtyController extends Controller
             return redirect(url('/admin/specialties'));
 
         }else {
+
+            if(file_exists(public_path('uploads/specialtiesImages/'.$specialty->image))){
+                unlink(public_path('uploads/specialtiesImages/'.$specialty->image));
+            }
 
             $specialty->delete();
 

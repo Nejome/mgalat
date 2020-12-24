@@ -194,8 +194,6 @@ class ProviderDataController extends Controller
 
     public function updateLocation(Request $request, $provider) {
 
-        return auth()->user();
-
         $provider = Provider::find($provider);
 
         if($provider) {
@@ -234,7 +232,14 @@ class ProviderDataController extends Controller
 
         if($provider) {
 
-            return $provider->ratingTotal();
+            $data['team'] = $provider->teamTotal();
+            $data['time'] = $provider->timeTotal();
+            $data['good'] = $provider->goodTotal();
+            $data['another'] = $provider->anotherTotal();
+            $data['price'] = $provider->priceTotal();
+            $data['total'] = $provider->ratingTotal();
+
+            return $data;
 
         }else {
 

@@ -14,10 +14,16 @@ class Specialty extends JsonResource
      */
     public function toArray($request)
     {
+        if ($this->image){
+            $image = asset('uploads/specialtiesImages/'.$this->image);
+        }else{
+            $image = '';
+        }
         return [
             'id' => $this->id,
             'department' => $this->department->title,
             'title' => $this->title,
+            'image' => $image,
             'providersCount' => $this->providers->count(),
         ];
     }

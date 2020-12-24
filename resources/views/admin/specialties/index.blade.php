@@ -26,7 +26,7 @@
                                                 </div>
                                                 <div class="card-body px-lg-5 py-lg-5">
 
-                                                    <form method="POST" action="{{url('/admin/specialties/store')}}" role="form">
+                                                    <form method="POST" action="{{url('/admin/specialties/store')}}" role="form" enctype="multipart/form-data">
                                                         {{csrf_field()}}
                                                         <div class="text-center text-muted mb-2">
                                                             <small>العنوان (العربي)</small>
@@ -60,6 +60,16 @@
                                                                         <option value="{{$row->id}}">{{$row->title}}</option>
                                                                     @endforeach
                                                                 </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="text-center text-muted mb-2">
+                                                            <small>الصورة</small>
+                                                        </div>
+
+                                                        <div class="form-group mb-3">
+                                                            <div class="input-group input-group-alternative">
+                                                                <input type="file" name="image" class="form-control" placeholder="الصورة">
                                                             </div>
                                                         </div>
 
@@ -128,6 +138,7 @@
                             <tr class="text-center">
                                 <th scope="col">العنوان (العربي)</th>
                                 <th scope="col">العنوان (English)</th>
+                                <th scope="col">الصورة</th>
                                 <th scope="col">القسم</th>
                                 <th scope="col">مزودي الخدمات</th>
                                 <th scope="col"></th>
@@ -140,6 +151,7 @@
 
                                     <td>{{$row->getTranslation('title', 'ar')}}</td>
                                     <td>{{$row->getTranslation('title', 'en')}}</td>
+                                    <td>@if($row->image) <img src="{{asset('uploads/specialtiesImages/'.$row->image)}}" width="70px" height="70px"> @else - @endif</td>
                                     <td>{{$row->department->title}}</td>
                                     <td>{{$row->providers->count()}}</td>
 

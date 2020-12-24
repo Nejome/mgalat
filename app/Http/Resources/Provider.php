@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Specialty;
 
 class Provider extends JsonResource
 {
@@ -19,7 +20,7 @@ class Provider extends JsonResource
             'name' => $this->name,
             'phone' => $this->phone,
             'country' => $this->country->title,
-            'specialty' => $this->specialty->title,
+            'specialty' => new Specialty($this->specialty),
             'description' => $this->description,
             'facebook' => $this->facebook,
             'twitter' => $this->twitter,

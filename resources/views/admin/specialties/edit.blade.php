@@ -15,7 +15,7 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="{{url('admin/specialties/'.$specialty->id.'/update')}}">
+                    <form method="POST" action="{{url('admin/specialties/'.$specialty->id.'/update')}}" enctype="multipart/form-data">
 
                         {{csrf_field()}}
 
@@ -56,6 +56,26 @@
                                     </div>
                                 </div>
                             </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">الصورة الحالية</label>
+                                            @if($specialty->image)
+                                                <img class="d-block" src="{{asset('uploads/specialtiesImages/'.$specialty->image)}}" width="100%">
+                                            @else
+                                                <p>لا توجد</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">الصورة الجديدة (240 * 360)</label>
+                                            <input type="file" name="image" class="form-control form-control-alternative">
+                                            <p class="text-danger">{{$errors->first('image')}}</p>
+                                        </div>
+                                    </div>
+                                </div>
 
                         </div>
 
