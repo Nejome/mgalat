@@ -34,21 +34,24 @@ class VerificationCode extends Model
 
         $client = new Client();
 
-        $data = [
-            'json' => [
-                "Username" => "0505349879",
-                "Password" => "EID9879eid",
-                "Tagname" => "MJALATTK-AD",
-                "RecepientNumber" => $verification_code->phone,
-                "Message" => $verification_code->code,
+        $message = 'رمز التفعيل لتطبيق مجالات تك هو : '.$verification_code->code;
+
+        $options = [
+            'form_params' => [
+                'username' => 'Majalattk',
+                'password' => 'EID9879eid',
+                'message' => $message,
+                'numbers' => $verification_code->phone,
+                'sender' => 'A-sh-est',
+                'unicode' => 'E',
+                'return' => 'json'
             ]
         ];
+        $response = $client->post('http://www.alsaad2.net/api/sendsms.php', $options);
 
-        $response = $client->post("http://api.yamamah.com/SendSMS", $data);
+        $body = json_decode($response->getBody()->getContents(), true);
 
-        $body = json_decode($response->getBody()->getContents());
-
-        if($body->Status == 1) {
+        if($body['Code'] == 100) {
 
             return true;
 

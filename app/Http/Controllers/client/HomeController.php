@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\ApplicationRate;
 use App\Http\Controllers\Controller;
 use App\Provider;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\ApplicationImage;
 use App\Department;

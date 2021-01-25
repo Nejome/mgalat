@@ -178,6 +178,7 @@ class GeneralDataController extends Controller
         $normal_providers_count = 0;
 
         $providers = Provider::whereIn('id', $close_providers_id)
+            ->where('active', 1)
             ->OrderBy('is_special', 'desc')
             ->get();
 
