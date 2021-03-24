@@ -20,7 +20,7 @@ class Specialty extends Model
 
     public function providers() {
 
-        return $this->hasMany('App\Provider');
+        return $this->hasMany('App\Provider')->where('active', 1);
 
     }
 

@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->share('setting', Setting::find(1));
         view()->share('g_countries', Country::all());
-        view()->share('g_6_providers', Provider::latest()->limit(6)->get());
+        view()->share('g_6_providers', Provider::where('active', 1)->latest()->limit(6)->get());
         view()->share('g_3_posts', Post::latest()->limit(3)->get());
         view()->share('g_departments_count', Department::all()->count());
         view()->share('g_specialties_count', Specialty::all()->count());

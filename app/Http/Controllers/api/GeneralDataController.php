@@ -96,7 +96,6 @@ class GeneralDataController extends Controller
 
     }
 
-
     public function search(Request $request) {
 
         $message = [
@@ -128,6 +127,7 @@ class GeneralDataController extends Controller
 
         $providers = Provider::whereIn('id', $close_providers_id)
             ->whereIn('specialty_id', $specialties_id)
+            ->where('active', 1)
             ->OrderBy('is_special', 'desc')
             ->get();
 

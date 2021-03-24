@@ -16,9 +16,9 @@ class ProviderController extends Controller
 
     public function index() {
 
-       $providers = Provider::where('deleted_at', null)->latest()->paginate(5);
+        $providers = Provider::where('deleted_at', null)->latest()->paginate(5);
 
-       return view('admin.providers.index', compact(['providers']));
+        return view('admin.providers.index', compact(['providers']));
 
     }
 
@@ -224,6 +224,11 @@ class ProviderController extends Controller
 
         if(file_exists(public_path('uploads/providers/'.$provider->image))){
             unlink(public_path('uploads/providers/'.$provider->image));
+        }
+
+        $views = $provider->viewsDetails;
+        foreach($views as $view){
+            $view->delete();
         }
 
         $provider->delete();

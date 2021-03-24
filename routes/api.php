@@ -7,7 +7,7 @@ Route::group(['prefix' => 'providers'], function () {
 
     Route::post('/verify', 'api\providers\ProviderController@verify');
 
-    Route::post('/register', 'api\providers\ProviderController@register');
+    Route::post('/store-provider', 'api\providers\ProviderController@register');
 
     Route::get('/{provider}/ProviderProfile', 'api\providers\ProviderController@ProviderProfile');
 

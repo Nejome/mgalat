@@ -47,6 +47,7 @@ class Department extends Model
 
         $providers = Provider::whereIn('specialty_id', $specialties_id)
             ->OrderBy('is_special', 'desc')
+            ->where('active', 1)
             ->get();
 
         foreach($providers as $provider) {
